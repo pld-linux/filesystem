@@ -5,7 +5,7 @@ Summary(pl):	Podstawa uk³ad katalogów systemu Linux
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		filesystem
 Version:	1.5
-Release:	4
+Release:	5
 Copyright:	Public Domain
 Group:		Base
 Group(pl):	Podstawowe
@@ -51,7 +51,7 @@ install -d $RPM_BUILD_ROOT/{bin,boot,home/users,opt} \
 	$RPM_BUILD_ROOT/usr/local/{bin,games,share/{info,doc,man},lib,sbin,src} \
 	$RPM_BUILD_ROOT/var/{lock/subsys,log,mail,run,spool} \
 	$RPM_BUILD_ROOT/var/{games,state/misc,tmp,db,opt,crash,cache,account} \
-	$RPM_BUILD_ROOT/var/cache/fonts \
+	$RPM_BUILD_ROOT/var/cache \
 	$RPM_BUILD_ROOT/usr/X11R6/share/applnk
 
 ln -sf share/man 	$RPM_BUILD_ROOT/usr/man
