@@ -1,7 +1,7 @@
 Summary:     Basic filesystem layout
 Summary(de): Grundlegende Dateisystemstruktur
 Summary(fr): Arborescence de base du système de fichiers
-Summary(pl): Podstawa struktóra katalogów systemu
+Summary(pl): Podstawa struktura katalogów systemu
 Summary(tr): Temel dosya sistemi yapýsý
 Name:        filesystem
 Version:     1.4
