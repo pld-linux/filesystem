@@ -4,8 +4,8 @@ Summary(fr):	Arborescence de base du système de fichiers
 Summary(pl):	Podstawa uk³ad katalogów systemu Linux
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		filesystem
-Version:	1.4
-Release:	8
+Version:	1.5
+Release:	1
 Copyright:	Public Domain
 Group:		Base
 Group(pl):	Bazowe
@@ -53,26 +53,19 @@ install -d $RPM_BUILD_ROOT/{bin,boot,home/users,opt} \
 	$RPM_BUILD_ROOT/var/{local,lock/subsys,log,run,preserve,mail,spool} \
 	$RPM_BUILD_ROOT/var/{games,state,tmp,db,opt}
 
-cd $RPM_BUILD_ROOT
-ln -s share/man 	usr/man
-ln -s share/man 	usr/X11R6/man
-ln -s share/man 	usr/local/man
-ln -s share/info 	usr/info
-ln -s state 		var/lib
-ln -s share/doc 	usr/doc
-ln -s share/doc 	usr/local/doc
-ln -s share/dict 	usr/dict
+ln -sf ../share/man 	$RPM_BUILD_ROOT/usr/man
+ln -sf ../share/man 	$RPM_BUILD_ROOT/usr/local/man
+ln -sf ../share/info 	$RPM_BUILD_ROOT/usr/info
+ln -sf state		$RPM_BUILD_ROOT/var/lib
+ln -sf ../share/doc 	$RPM_BUILD_ROOT/usr/doc
+ln -sf ../share/doc 	$RPM_BUILD_ROOT/usr/local/doc
+ln -sf ../share/dict 	$RPM_BUILD_ROOT/usr/dict
 
 %pre
 if [ -e /usr/man ] && [ ! -L /usr/man ]; then 
 	mkdir -p /usr/share/man
 	cp -a /usr/man/* /usr/share/man || :
 	rm -rf /usr/man
-fi 
-if [ -e /usr/X11R6/man ] && [ ! -L /usr/X11R6/man ]; then 
-	mkdir -p /usr/X11R6/share/man
-	cp -a /usr/X11R6/man/* /usr/X11R6/share/man
-	rm -rf /usr/X11R6/man
 fi 
 if [ -e /usr/local/man ] && [ ! -L /usr/local/man ]; then 
 	mkdir -p /usr/local/share/man
@@ -128,7 +121,6 @@ rm -rf $RPM_BUILD_ROOT
 /usr
 %dir /var
 %dir /var/db
-%dir /var/state
 %dir /var/lib
 %dir /var/local
 %dir /var/lock
@@ -137,9 +129,13 @@ rm -rf $RPM_BUILD_ROOT
 %dir /var/preserve
 %dir /var/spool
 %dir /var/state
-%dir /var/tmp
+%attr(1777,root,root) %dir /var/tmp
 
 %changelog
+* Thu May  6 1999 Artur Frysiak <wiget@pld.org.pl>
+  [1.5-1]
+- modyfications for FHS 2.0.
+
 * Tue Apr 20 1999 Piotr Czerwiñski <pius@pld.org.pl>
   [1.4-8]
 - recompiled on rpm 3.
