@@ -50,13 +50,13 @@ ln -sf ../var/tmp $RPM_BUILD_ROOT/usr/tmp
 
 install -d $RPM_BUILD_ROOT/usr/man/man{1,2,3,4,5,6,7,8,9,n}
 
-install -d $RPM_BUILD_ROOT/usr/X11R6/{bin,inclide,lib,man/man{1,3,4,5,6}}
+install -d $RPM_BUILD_ROOT/usr/X11R6/{bin,include,lib,man/man{1,3,4,5,6}}
 install -d $RPM_BUILD_ROOT/usr/lib/{games,gcc-lib}
 
 install -d $RPM_BUILD_ROOT/usr/local/{bin,etc,doc,games,info,lib,man/man{1,2,3,4,5,6,7,8,9,n},sbin,src}
 
 install -d $RPM_BUILD_ROOT/var/{lib,local,lock/subsys,log,run,preserve,spool/mail}
-install -d $RPM_BUILD_ROOT/var/{lib/{games,rpm},nis,tmp}
+install -d $RPM_BUILD_ROOT/var/{lib/{games,rpm},tmp}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -70,7 +70,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %attr(0755, root, users) /home/users
 /lib
 /mnt
-%dir /proc
+%dir %attr(0555, root, root) /proc
 %dir %attr(0700, root, root) /root
 %dir /sbin
 %dir %attr(1777, root, root) /tmp
