@@ -61,46 +61,6 @@ ln -sf share/doc 	$RPM_BUILD_ROOT/usr/doc
 ln -sf share/doc 	$RPM_BUILD_ROOT/usr/local/doc
 ln -sf share/dict 	$RPM_BUILD_ROOT/usr/dict
 
-%pre
-if [ -e /usr/man ] && [ ! -L /usr/man ]; then 
-	mkdir -p /usr/share/man
-	cp -a /usr/man/* /usr/share/man || :
-	rm -rf /usr/man
-fi 
-if [ -e /usr/info ] && [ ! -L /usr/info ]; then 
-	mkdir -p /usr/share/info
-	cp -a /usr/info/* /usr/share/info || :
-	rm -rf /usr/info
-	ln -sf ../../../etc/info-dir /usr/share/info/dir
-fi 
-if [ -e /usr/doc ] && [ ! -L /usr/doc ]; then 
-	mkdir -p /usr/share/doc
-	cp -a /usr/doc/* /usr/share/doc || :
-	rm -rf /usr/doc
-fi 
-if [ -e /usr/local/doc ] && [ ! -L /usr/local/doc ]; then 
-	mkdir -p /usr/local/share/doc
-	cp -a /usr/local/doc/* /usr/local/share/doc
-	rm -rf /usr/local/doc
-fi 
-if [ -e /usr/dict ] && [ ! -L /usr/dict ]; then 
-	mkdir -p /usr/share/dict
-	cp -a /usr/dict/* /usr/share/dict || :
-	rm -rf /usr/dict
-fi 
-if [ -e /var/lib ] && [ ! -L /var/lib ]; then 
-	mkdir -p /var/state
-	cp -a /var/lib/* /var/state
-	rm -rf /var/lib
-fi 
-
-%post
-if [ -L /var/tmp ]; then
-	rm -rf /var/tmp
-	mkdir -p /var/tmp
-	chmod 1777 /var/tmp
-fi
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
