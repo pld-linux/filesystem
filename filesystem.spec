@@ -43,7 +43,7 @@ metin dosyalarý yazýmý için yararlýdýr.
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/{bin,boot,home/users,opt} \
-	$RPM_BUILD_ROOT/etc/{X11/wmconfig,profile.d,security,opt} \
+	$RPM_BUILD_ROOT/etc/{profile.d,security,opt} \
 	$RPM_BUILD_ROOT/lib/{modules,security} \
 	$RPM_BUILD_ROOT/{mnt/{floppy,cdrom},proc,root,sbin,tmp} \
 	$RPM_BUILD_ROOT/usr/{bin,src,games,lib,include,sbin,share} \
@@ -51,7 +51,8 @@ install -d $RPM_BUILD_ROOT/{bin,boot,home/users,opt} \
 	$RPM_BUILD_ROOT/usr/local/{bin,games,share/{info,doc,man},lib,sbin,src} \
 	$RPM_BUILD_ROOT/var/{lock/subsys,log,mail,run,spool} \
 	$RPM_BUILD_ROOT/var/{games,state/misc,tmp,db,opt,crash,cache,account} \
-	$RPM_BUILD_ROOT/var/cache/fonts 
+	$RPM_BUILD_ROOT/var/cache/fonts \
+	$RPM_BUILD_ROOT/usr/X11R6/share/applnk
 
 ln -sf share/man 	$RPM_BUILD_ROOT/usr/man
 ln -sf share/info 	$RPM_BUILD_ROOT/usr/info
@@ -112,7 +113,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir /etc/profile.d
 %dir /etc/opt
 %dir /etc/X11
-%dir /etc/X11/wmconfig
+%dir /usr/X11R6/share/applnk
 /home
 /lib
 /mnt
