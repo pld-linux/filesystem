@@ -41,7 +41,7 @@ metin dosyalarý yazýmý için yararlýdýr.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/{bin,boot,etc/X11,home/users,lib/mosules}
+install -d $RPM_BUILD_ROOT/{bin,boot,etc/X11,home/users,lib/modules}
 install -d $RPM_BUILD_ROOT/{mnt/floppy,proc,root,sbin,tmp}
 install -d $RPM_BUILD_ROOT/usr/{X11R6/{bin,include,lib,man},bin,dict}
 install -d $RPM_BUILD_ROOT/usr/{bin,dict,doc,etc,games,include,info,sbin,share}
