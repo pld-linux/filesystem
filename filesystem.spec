@@ -48,7 +48,7 @@ install -d $RPM_BUILD_ROOT/{bin,boot,home/users,opt} \
 	$RPM_BUILD_ROOT/{mnt/{floppy,cdrom},proc,root,sbin,tmp} \
 	$RPM_BUILD_ROOT/usr/{bin,src,games,lib,include,sbin,share} \
 	$RPM_BUILD_ROOT/usr/share/{dict,doc,info,man,misc,games,tmac} \
-	$RPM_BUILD_ROOT/usr/local/{bin,games,share/{info,doc},man,lib,sbin,src} \
+	$RPM_BUILD_ROOT/usr/local/{bin,games,share/{info,doc,man},lib,sbin,src} \
 	$RPM_BUILD_ROOT/var/{lock/subsys,log,mail,run,spool} \
 	$RPM_BUILD_ROOT/var/{games,state/misc,tmp,db,opt,crash,cache,account} \
 	$RPM_BUILD_ROOT/var/cache/fonts 
