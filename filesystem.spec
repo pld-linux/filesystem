@@ -43,7 +43,7 @@ metin dosyalarý yazýmý için yararlýdýr.
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/{bin,boot,home/users,opt} \
-	$RPM_BUILD_ROOT/etc/{profile.d,security,opt} \
+	$RPM_BUILD_ROOT/etc/{X11,profile.d,security,opt} \
 	$RPM_BUILD_ROOT/lib/{modules,security} \
 	$RPM_BUILD_ROOT/{mnt/{floppy,cdrom},proc,root,sbin,tmp} \
 	$RPM_BUILD_ROOT/usr/{bin,src,games,lib,include,sbin,share} \
