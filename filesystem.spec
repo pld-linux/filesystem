@@ -53,30 +53,30 @@ install -d $RPM_BUILD_ROOT/{bin,boot,home/users,opt} \
 	$RPM_BUILD_ROOT/var/{local,lock/subsys,log,run,preserve,mail,spool} \
 	$RPM_BUILD_ROOT/var/{games,state,tmp,db,opt}
 
-ln -sf share/man 	$RPM_BUILD_ROOT/usr/man
+ln -sf share/man 	$RPM_BUILD_ROOT%{_mandir}
 ln -sf share/man 	$RPM_BUILD_ROOT/usr/local/man
-ln -sf share/info 	$RPM_BUILD_ROOT/usr/info
+ln -sf share/info 	$RPM_BUILD_ROOT%{_infodir}
 ln -sf state		$RPM_BUILD_ROOT/var/lib
 ln -sf share/doc 	$RPM_BUILD_ROOT/usr/doc
 ln -sf share/doc 	$RPM_BUILD_ROOT/usr/local/doc
 ln -sf share/dict 	$RPM_BUILD_ROOT/usr/dict
 
 %pre
-if [ -e /usr/man ] && [ ! -L /usr/man ]; then 
-	mkdir -p /usr/share/man
-	cp -a /usr/man/* /usr/share/man || :
-	rm -rf /usr/man
+if [ -e %{_mandir} ] && [ ! -L /usr/man ]; then 
+	mkdir -p %{_mandir}
+	cp -a %{_mandir}/* %{_mandir} || :
+	rm -rf %{_mandir}
 fi 
 if [ -e /usr/local/man ] && [ ! -L /usr/local/man ]; then 
 	mkdir -p /usr/local/share/man
 	cp -a /usr/local/man/* /usr/local/share/man || :
 	rm -rf /usr/local/man
 fi 
-if [ -e /usr/info ] && [ ! -L /usr/info ]; then 
-	mkdir -p /usr/share/info
-	cp -a /usr/info/* /usr/share/info || :
-	rm -rf /usr/info
-	ln -sf ../../../etc/info-dir /usr/share/info/dir
+if [ -e %{_infodir} ] && [ ! -L /usr/info ]; then 
+	mkdir -p %{_infodir}
+	cp -a %{_infodir}/* %{_infodir} || :
+	rm -rf %{_infodir}
+	ln -sf ../../../etc/info-dir %{_infodir}/dir
 fi 
 if [ -e /usr/doc ] && [ ! -L /usr/doc ]; then 
 	mkdir -p /usr/share/doc
@@ -173,7 +173,7 @@ rm -rf $RPM_BUILD_ROOT
 - added /var/qmail,
 - all symlinks are now as %ghost,
 - added /var/lock/subsys,
-- added /usr/X11R6/man/* & /usr/man/man/*,
+- added /usr/X11R6/man/* & %{_mandir}/man/*,
 - fixed permission of /var/spool/mail,
 - added /etc/mail && /home/ftp,
 - added /usr/lib/gopher-data && /usr/lib/games.
