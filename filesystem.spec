@@ -42,7 +42,7 @@ metin dosyalarý yazýmý için yararlýdýr.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/{bin,boot,home/users,opt} \
+install -d $RPM_BUILD_ROOT/{bin,boot,home/{ftp,httpd,users},opt} \
 	$RPM_BUILD_ROOT/etc/{X11/wmconfig,profile.d,security,opt} \
 	$RPM_BUILD_ROOT/lib/{modules,security} \
 	$RPM_BUILD_ROOT/{mnt/{floppy,cdrom},proc,root,sbin,tmp} \
