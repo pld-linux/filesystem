@@ -55,7 +55,7 @@ install -d $RPM_BUILD_ROOT/usr/lib/{games,gcc-lib}
 
 install -d $RPM_BUILD_ROOT/usr/local/{bin,etc,doc,games,info,lib,man/man{1,2,3,4,5,6,7,8,9,n},sbin,src}
 
-install -d $RPM_BUILD_ROOT/var/{lib,local,lock/subsys,log,run,preserve}
+install -d $RPM_BUILD_ROOT/var/{lib,local,lock/subsys,log,run,preserve,spool}
 install -d $RPM_BUILD_ROOT/var/{lib/{games,rpm},tmp}
 
 %clean
@@ -97,7 +97,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %attr(700, root, root) /var/lib/rpm
 %dir /var/local
 /var/lock
-%attr(711, root, mail) %dir /var/log
+%attr(711, root, root) %dir /var/log
 %dir /var/run
 %dir /var/preserve
 %dir /var/spool
