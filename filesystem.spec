@@ -132,8 +132,11 @@ rm -rf $RPM_BUILD_ROOT
 %dir /var/crash
 %attr(1777,root,root) /var/mail
 /var/cache
-/var/spool
-/var/state
+%attr(1777,root,root) /var/spool/mqueue
+%dir /var/spool/lpd
+%dir /var/spool/news
+%dir /var/spool/uucp
+%dir /var/state
 %dir /var/opt
 %attr(1777,root,root) %dir /var/tmp
 
