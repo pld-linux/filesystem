@@ -42,16 +42,16 @@ metin dosyalarý yazýmý için yararlýdýr.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/{bin,boot,home/{users,ftp,httpd},opt} \
+install -d $RPM_BUILD_ROOT/{bin,boot,home/users,opt} \
 	$RPM_BUILD_ROOT/etc/{X11/wmconfig,profile.d,security,opt} \
 	$RPM_BUILD_ROOT/lib/{modules,security} \
 	$RPM_BUILD_ROOT/{mnt/{floppy,cdrom},proc,root,sbin,tmp} \
 	$RPM_BUILD_ROOT/usr/{bin,src,games,lib,include,sbin,share} \
 	$RPM_BUILD_ROOT/usr/share/{dict,doc,info,man,misc,games,tmac} \
 	$RPM_BUILD_ROOT/usr/local/{bin,games,share/{info,doc},man,lib,sbin,src} \
-	$RPM_BUILD_ROOT/var/{lock/subsys,log,mail,run,spool/{mqueue,news,uucp,lpd}} \
+	$RPM_BUILD_ROOT/var/{lock/subsys,log,mail,run,spool} \
 	$RPM_BUILD_ROOT/var/{games,state/misc,tmp,db,opt,crash,cache,account} \
-	$RPM_BUILD_ROOT/var/cache/{fonts,www} 
+	$RPM_BUILD_ROOT/var/cache/fonts 
 
 ln -sf share/man 	$RPM_BUILD_ROOT/usr/man
 ln -sf share/info 	$RPM_BUILD_ROOT/usr/info
@@ -130,9 +130,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(751,root,root) /var/log
 %dir /var/run
 %dir /var/crash
-%attr(1777,root,root) /var/mail
 /var/cache
-/var/spool/uucp
 %dir /var/state
 %dir /var/opt
 %attr(1777,root,root) %dir /var/tmp
