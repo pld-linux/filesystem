@@ -59,22 +59,22 @@ ln -sf ../tmp $RPM_BUILD_ROOT/var/tmp
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%defattr(755,root,root)
+%defattr(755,root,root,755)
 /bin
-%attr(700,root,root) %dir /boot
+%attr(-,root,root,700) /boot
 /etc
 /home
 /lib
 /mnt
-%attr(555,root,root) %dir /proc
+%attr(-,root,root,555) /proc
 /sbin
-%attr(1777,root,root) /tmp
+%attr(-,root,root,1777) /tmp
 /usr
 %dir /var
 /var/lib
 /var/local
 /var/lock
-%attr(711,root,root) /var/log
+%attr(-,root,root,711) /var/log
 /var/run
 /var/preserve
 /var/spool
