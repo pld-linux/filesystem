@@ -76,6 +76,7 @@ if [ -e /usr/info ] && [ ! -L /usr/info ]; then
 	mkdir -p /usr/share/info
 	cp -a /usr/info/* /usr/share/info || :
 	rm -rf /usr/info
+	ln -sf ../../../etc/info-dir /usr/share/info/dir
 fi 
 if [ -e /usr/doc ] && [ ! -L /usr/doc ]; then 
 	mkdir -p /usr/share/doc
