@@ -46,16 +46,14 @@ install -d $RPM_BUILD_ROOT/{bin,boot,home/{users,ftp,httpd},opt} \
 	$RPM_BUILD_ROOT/etc/{X11/wmconfig,profile.d,security,opt} \
 	$RPM_BUILD_ROOT/lib/{modules,security} \
 	$RPM_BUILD_ROOT/{mnt/{floppy,cdrom},proc,root,sbin,tmp} \
-	$RPM_BUILD_ROOT/usr/{bin,etc,games,include,sbin,share} \
+	$RPM_BUILD_ROOT/usr/{bin,src,games,lib,include,sbin,share} \
 	$RPM_BUILD_ROOT/usr/share/{dict,doc,info,man,misc,games,fonts} \
-	$RPM_BUILD_ROOT/usr/{games,lib/games} \
-	$RPM_BUILD_ROOT/usr/local/{bin,games,share/{info,man,doc},lib,sbin,src} \
+	$RPM_BUILD_ROOT/usr/local/{bin,games,share/{info,doc},man,lib,sbin,src} \
 	$RPM_BUILD_ROOT/var/{lock/subsys,log,mail,run,spool/{mqueue,news,uucp,lpd}} \
 	$RPM_BUILD_ROOT/var/{games,state/misc,tmp,db,opt,crash,cache,account} \
-	$RPM_BUILD_ROOT/var/cache/{fonts,man,www} 
+	$RPM_BUILD_ROOT/var/cache/{fonts,www} 
 
 ln -sf share/man 	$RPM_BUILD_ROOT/usr/man
-ln -sf share/man 	$RPM_BUILD_ROOT/usr/local/man
 ln -sf share/info 	$RPM_BUILD_ROOT/usr/info
 ln -sf state		$RPM_BUILD_ROOT/var/lib
 ln -sf share/doc 	$RPM_BUILD_ROOT/usr/doc
@@ -67,11 +65,6 @@ if [ -e /usr/man ] && [ ! -L /usr/man ]; then
 	mkdir -p /usr/share/man
 	cp -a /usr/man/* /usr/share/man || :
 	rm -rf /usr/man
-fi 
-if [ -e /usr/local/man ] && [ ! -L /usr/local/man ]; then 
-	mkdir -p /usr/local/share/man
-	cp -a /usr/local/man/* /usr/local/share/man || :
-	rm -rf /usr/local/man
 fi 
 if [ -e /usr/info ] && [ ! -L /usr/info ]; then 
 	mkdir -p /usr/share/info
@@ -145,6 +138,16 @@ rm -rf $RPM_BUILD_ROOT
 %attr(1777,root,root) %dir /var/tmp
 
 %changelog
+* Sun May 30 1999 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
+
+- /usr/local/man instead /usr/local/share/man
+- removed /var/cache/man -- now man correct provides it.
+- added /usr/src && removed /usr/etc 
+- removed /usr/lib/games 
+- added /usr/local/include
+
+    Read FHS 2.0 for more details ...
+ 
 * Wed May 19 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [1.5-2]
 - spec based on RH spec,
