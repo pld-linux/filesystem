@@ -47,7 +47,7 @@ install -d $RPM_BUILD_ROOT/{bin,boot,home/users,opt} \
 	$RPM_BUILD_ROOT/lib/{modules,security} \
 	$RPM_BUILD_ROOT/{mnt/{floppy,cdrom},proc,root,sbin,tmp} \
 	$RPM_BUILD_ROOT/usr/{bin,etc,games,include,sbin,share} \
-	$RPM_BUILD_ROOT/usr/share/{dict,doc,info,man,misc,games,fonts} \
+	$RPM_BUILD_ROOT%{_datadir}/{dict,doc,info,man,misc,games,fonts} \
 	$RPM_BUILD_ROOT/usr/{games,lib/games} \
 	$RPM_BUILD_ROOT/usr/local/{bin,games,share/{info,man,doc},lib,sbin,src} \
 	$RPM_BUILD_ROOT/var/{local,lock/subsys,log,run,preserve,mail,spool} \
@@ -89,8 +89,8 @@ if [ -e /usr/local/doc ] && [ ! -L /usr/local/doc ]; then
 	rm -rf /usr/local/doc
 fi 
 if [ -e /usr/dict ] && [ ! -L /usr/dict ]; then 
-	mkdir -p /usr/share/dict
-	cp -a /usr/dict/* /usr/share/dict || :
+	mkdir -p %{_datadir}/dict
+	cp -a /usr/dict/* %{_datadir}/dict || :
 	rm -rf /usr/dict
 fi 
 if [ -e /var/lib ] && [ ! -L /var/lib ]; then 
