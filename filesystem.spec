@@ -59,7 +59,7 @@ ln -sf ../tmp $RPM_BUILD_ROOT/var/tmp
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%defattr(755,root,root,755)
+%defattr(-,root,root,755)
 /bin
 %attr(-,root,root,700) /boot
 /etc
@@ -67,6 +67,7 @@ rm -rf $RPM_BUILD_ROOT
 /lib
 /mnt
 %attr(-,root,root,555) /proc
+%attr(-,root,root,700) /root
 /sbin
 %attr(-,root,root,1777) /tmp
 /usr
@@ -87,6 +88,7 @@ rm -rf $RPM_BUILD_ROOT
 - added /usr/src,
 - removed many directories which must belongs to other packages
   (webserwer, ftpdaemon, smtpdaemon, gopher serwer, petidomo),
+- simplification in %files,
 - changed GUID on man directorirs to root.
 
 * Wed Dec 30 1998 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
