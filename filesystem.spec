@@ -53,13 +53,13 @@ install -d $RPM_BUILD_ROOT/{bin,boot,home/users,opt} \
 	$RPM_BUILD_ROOT/var/{local,lock/subsys,log,run,preserve,mail,spool} \
 	$RPM_BUILD_ROOT/var/{games,state,tmp,db,opt}
 
-ln -sf ../share/man 	$RPM_BUILD_ROOT/usr/man
-ln -sf ../share/man 	$RPM_BUILD_ROOT/usr/local/man
-ln -sf ../share/info 	$RPM_BUILD_ROOT/usr/info
+ln -sf share/man 	$RPM_BUILD_ROOT/usr/man
+ln -sf share/man 	$RPM_BUILD_ROOT/usr/local/man
+ln -sf share/info 	$RPM_BUILD_ROOT/usr/info
 ln -sf state		$RPM_BUILD_ROOT/var/lib
-ln -sf ../share/doc 	$RPM_BUILD_ROOT/usr/doc
-ln -sf ../share/doc 	$RPM_BUILD_ROOT/usr/local/doc
-ln -sf ../share/dict 	$RPM_BUILD_ROOT/usr/dict
+ln -sf share/doc 	$RPM_BUILD_ROOT/usr/doc
+ln -sf share/doc 	$RPM_BUILD_ROOT/usr/local/doc
+ln -sf share/dict 	$RPM_BUILD_ROOT/usr/dict
 
 %pre
 if [ -e /usr/man ] && [ ! -L /usr/man ]; then 
