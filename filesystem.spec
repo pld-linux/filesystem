@@ -74,7 +74,6 @@ rm -rf $RPM_BUILD_ROOT
 /var/lib
 /var/local
 /var/lock
-/var/lock/subsys
 %attr(711,root,root) /var/log
 /var/run
 /var/preserve
