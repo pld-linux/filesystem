@@ -5,7 +5,7 @@ Summary(pl):	Podstawa uk³ad katalogów systemu Linux
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		filesystem
 Version:	1.5
-Release:	2
+Release:	3
 Copyright:	Public Domain
 Group:		Base
 Group(pl):	Podstawowe
@@ -50,8 +50,9 @@ install -d $RPM_BUILD_ROOT/{bin,boot,home/users,opt} \
 	$RPM_BUILD_ROOT/usr/share/{dict,doc,info,man,misc,games,fonts} \
 	$RPM_BUILD_ROOT/usr/{games,lib/games} \
 	$RPM_BUILD_ROOT/usr/local/{bin,games,share/{info,man,doc},lib,sbin,src} \
-	$RPM_BUILD_ROOT/var/{local,lock/subsys,log,run,preserve,spool} \
-	$RPM_BUILD_ROOT/var/{games,state,tmp,db,opt}
+	$RPM_BUILD_ROOT/var/{lock/subsys,log,mail,run,spool/{mqueue,news,uucp,lpd}} \
+	$RPM_BUILD_ROOT/var/{games,state/misc,tmp,db,opt,crash,cache,account} \
+	$RPM_BUILD_ROOT/var/cache/{fonts,man,www} 
 
 ln -sf share/man 	$RPM_BUILD_ROOT/usr/man
 ln -sf share/man 	$RPM_BUILD_ROOT/usr/local/man
@@ -60,7 +61,6 @@ ln -sf state		$RPM_BUILD_ROOT/var/lib
 ln -sf share/doc 	$RPM_BUILD_ROOT/usr/doc
 ln -sf share/doc 	$RPM_BUILD_ROOT/usr/local/doc
 ln -sf share/dict 	$RPM_BUILD_ROOT/usr/dict
-ln -sf  log		$RPM_BUILD_ROOT/var/adm
 
 %pre
 if [ -e /usr/man ] && [ ! -L /usr/man ]; then 
@@ -115,7 +115,7 @@ rm -rf $RPM_BUILD_ROOT
 /bin
 %attr(700,root,root) /boot
 %dir /etc
-%attr(751,root,root) %dir /etc/security
+%attr(750,root,root) %dir /etc/security
 %dir /etc/profile.d
 %dir /etc/opt
 %dir /etc/X11
@@ -131,19 +131,27 @@ rm -rf $RPM_BUILD_ROOT
 /usr
 %dir /var
 %dir /var/db
-%dir /var/adm
-%dir /var/local
+%attr(700,root,root) /var/account
 %dir /var/games
 /var/lock
 %attr(751,root,root) /var/log
 %dir /var/run
-%dir /var/preserve
+%dir /var/crash
+%dir /var/mail
+/var/cache
 /var/spool
-%dir /var/state
+/var/state
 %dir /var/opt
 %attr(1777,root,root) %dir /var/tmp
 
 %changelog
+* Thu May 27 1999 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
+- major changes in /var -- FHS-2.0 compliant,
+- requires for setup package,
+
+-- wywaliæ ten wpis -- pakiet jest jeszcze w trakcie konstrukcji.
+
+
 * Wed May 19 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [1.5-2]
 - spec based on RH spec,
