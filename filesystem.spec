@@ -79,8 +79,8 @@ if [ -e %{_infodir} ] && [ ! -L /usr/info ]; then
 	ln -sf ../../../etc/info-dir %{_infodir}/dir
 fi 
 if [ -e /usr/doc ] && [ ! -L /usr/doc ]; then 
-	mkdir -p /usr/share/doc
-	cp -a /usr/doc/* /usr/share/doc || :
+	mkdir -p %{_defaultdocdir}
+	cp -a /usr/doc/* %{_defaultdocdir} || :
 	rm -rf /usr/doc
 fi 
 if [ -e /usr/local/doc ] && [ ! -L /usr/local/doc ]; then 
