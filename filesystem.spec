@@ -42,16 +42,14 @@ metin dosyalarý yazýmý için yararlýdýr.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/{bin,boot,etc/X11/wmconfig,home/users,lib/modules}
-install -d $RPM_BUILD_ROOT/{mnt/{floppy,cdrom},proc,root,sbin,tmp}
-install -d $RPM_BUILD_ROOT/usr/{bin,dict,doc,etc,games,include,info,sbin,share}
-
-install -d $RPM_BUILD_ROOT/usr/{games,lib/games,man}
-
-install -d $RPM_BUILD_ROOT/usr/local/{bin,etc,doc,games,info,lib,man,sbin,src}
-
-install -d $RPM_BUILD_ROOT/var/{lib,local,lock/subsys,log,run,preserve,spool/mail}
-install -d $RPM_BUILD_ROOT/var/lib/games
+install -d $RPM_BUILD_ROOT/{bin,boot,etc/X11/wmconfig,home/users} \
+	$RPM_BUILD_ROOT/lib/{modules,security} \
+	$RPM_BUILD_ROOT/{mnt/{floppy,cdrom},proc,root,sbin,tmp} \
+	$RPM_BUILD_ROOT/usr/{bin,dict,doc,etc,games,include,info,sbin,share} \
+	$RPM_BUILD_ROOT/usr/{games,lib/games,man} \
+	$RPM_BUILD_ROOT/usr/local/{bin,etc,doc,games,info,lib,man,sbin,src} \
+	$RPM_BUILD_ROOT/var/{local,lock/subsys,log,run,preserve,spool/mail} \
+	$RPM_BUILD_ROOT/var/{lib/games,state}
 
 ln -sf ../tmp $RPM_BUILD_ROOT/var/tmp
 
@@ -59,27 +57,29 @@ ln -sf ../tmp $RPM_BUILD_ROOT/var/tmp
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%defattr(-,root,root,755)
-/bin
+%defattr(755,root,root,755)
+%dir /bin
 %attr(700,root,root) /boot
-/etc
-/home
-/lib
-/mnt
+%dir /etc
+%dir /home
+%dir /lib
+%dir /lib/security
+%dir /mnt
 %attr(555,root,root) /proc
 %attr(700,root,root) /root
-/sbin
+%dir /sbin
 %attr(1777,root,root) /tmp
-/usr
+%dir /usr
 %dir /var
-/var/lib
-/var/local
-/var/lock
+%dir /var/lib
+%dir /var/local
+%dir /var/lock
 %attr(711,root,root) /var/log
-/var/run
-/var/preserve
-/var/spool
-/var/tmp
+%dir /var/run
+%dir /var/preserve
+%dir /var/spool
+%dir /var/state
+%dir /var/tmp
 
 %changelog
 * Tue Apr 20 1999 Piotr Czerwiñski <pius@pld.org.pl>
