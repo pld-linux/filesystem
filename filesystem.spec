@@ -42,7 +42,8 @@ metin dosyalarý yazýmý için yararlýdýr.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/{bin,boot,etc/X11/wmconfig,home/users} \
+install -d $RPM_BUILD_ROOT/{bin,boot,home/users} \
+	$RPM_BUILD_ROOT/etc/{X11/wmconfig,profile.d,security} \
 	$RPM_BUILD_ROOT/lib/{modules,security} \
 	$RPM_BUILD_ROOT/{mnt/{floppy,cdrom},proc,root,sbin,tmp} \
 	$RPM_BUILD_ROOT/usr/{bin,dict,doc,etc,games,include,info,sbin,share} \
@@ -61,6 +62,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir /bin
 %attr(700,root,root) /boot
 %dir /etc
+%dir /etc/security
+%dir /etc/profile.d
 %dir /home
 %dir /lib
 %dir /lib/security
