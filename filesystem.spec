@@ -61,21 +61,21 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,755)
 /bin
-%attr(-,root,root,700) /boot
+%attr(700,root,root) /boot
 /etc
 /home
 /lib
 /mnt
-%attr(-,root,root,555) /proc
-%attr(-,root,root,700) /root
+%attr(555,root,root) /proc
+%attr(700,root,root) /root
 /sbin
-%attr(-,root,root,1777) /tmp
+%attr(1777,root,root) /tmp
 /usr
 %dir /var
 /var/lib
 /var/local
 /var/lock
-%attr(-,root,root,711) /var/log
+%attr(711,root,root) /var/log
 /var/run
 /var/preserve
 /var/spool
