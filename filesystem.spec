@@ -5,7 +5,7 @@ Summary(pl): Podstawa struktóra katalogów systemu
 Summary(tr): Temel dosya sistemi yapýsý
 Name:        filesystem
 Version:     1.4
-Release:     1
+Release:     2
 Copyright:   Public Domain
 Group:       Base
 Buildroot:   /tmp/%{name}-%{version}-root
@@ -55,7 +55,7 @@ install -d $RPM_BUILD_ROOT/usr/lib/{games,gcc-lib}
 
 install -d $RPM_BUILD_ROOT/usr/local/{bin,etc,doc,games,info,lib,man/man{1,2,3,4,5,6,7,8,9,n},sbin,src}
 
-install -d $RPM_BUILD_ROOT/var/{lib,local,lock/subsys,log,run,preserve,spool/mail}
+install -d $RPM_BUILD_ROOT/var/{lib,local,lock/subsys,log,run,preserve}
 install -d $RPM_BUILD_ROOT/var/{lib/{games,rpm},tmp}
 
 %clean
@@ -101,10 +101,13 @@ rm -rf $RPM_BUILD_ROOT
 %dir /var/run
 %dir /var/preserve
 %dir /var/spool
-%dir %attr(0751, root, mail) /var/spool/mail
 %dir %attr(1777, root, root) /var/tmp
 
 %changelog
+* Thu Sep 24  1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [1.4-2]
+- removed /var/spool/mail. This maust belongs to MTA packages.
+
 * Mon Aug  10 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [1.4-1]
 - Buildroot changed to /tmp/%%{name}-%%{version}-root,
