@@ -5,7 +5,7 @@ Summary(pl):	Podstawa uk³ad katalogów systemu Linux
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		filesystem
 Version:	1.5
-Release:	3
+Release:	4
 Copyright:	Public Domain
 Group:		Base
 Group(pl):	Podstawowe
@@ -42,7 +42,7 @@ metin dosyalarý yazýmý için yararlýdýr.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/{bin,boot,home/users,opt} \
+install -d $RPM_BUILD_ROOT/{bin,boot,home/{users,ftp,httpd},opt} \
 	$RPM_BUILD_ROOT/etc/{X11/wmconfig,profile.d,security,opt} \
 	$RPM_BUILD_ROOT/lib/{modules,security} \
 	$RPM_BUILD_ROOT/{mnt/{floppy,cdrom},proc,root,sbin,tmp} \
@@ -131,7 +131,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr
 %dir /var
 %dir /var/db
-%attr(700,root,root) /var/account
+%dir /var/account
 %dir /var/games
 /var/lock
 %attr(751,root,root) /var/log
@@ -145,13 +145,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(1777,root,root) %dir /var/tmp
 
 %changelog
-* Thu May 27 1999 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
-- major changes in /var -- FHS-2.0 compliant,
-- requires for setup package,
-
--- wywaliæ ten wpis -- pakiet jest jeszcze w trakcie konstrukcji.
-
-
 * Wed May 19 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [1.5-2]
 - spec based on RH spec,
