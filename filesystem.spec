@@ -5,7 +5,7 @@ Summary(pl):	Podstawa uk³ad katalogów systemu Linux
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		filesystem
 Version:	1.4
-Release:	5
+Release:	6
 Copyright:	Public Domain
 Group:		Base
 Group(pl):	Podstawy
@@ -42,7 +42,7 @@ metin dosyalarý yazýmý için yararlýdýr.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/{bin,boot,etc,home/users,lib/modules}
+install -d $RPM_BUILD_ROOT/{bin,boot,etc/X11,home/users,lib/modules}
 install -d $RPM_BUILD_ROOT/{mnt/{floppy,cdrom},proc,root,sbin,tmp}
 install -d $RPM_BUILD_ROOT/usr/{bin,dict,doc,etc,games,include,info,sbin,share}
 
@@ -82,6 +82,10 @@ rm -rf $RPM_BUILD_ROOT
 /var/tmp
 
 %changelog
+* Thu Feb 23 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [1.4-6]
+- added /etc/X11.
+
 * Sun Feb 21 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [1.4-5]
 - removed /usr/tmp (not neccessary),
