@@ -113,7 +113,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir /etc/profile.d
 %dir /etc/opt
 %dir /etc/X11
-%dir /usr/X11R6/share/applnk
 /home
 /lib
 /mnt
