@@ -5,7 +5,7 @@ Summary(pl):	Podstawa uk³ad katalogów systemu Linux
 Summary(tr):	Temel dosya sistemi yapýsý
 Name:		filesystem
 Version:	1.4
-Release:	7
+Release:	8
 Copyright:	Public Domain
 Group:		Base
 Group(pl):	Bazowe
@@ -16,18 +16,18 @@ Buildarch:	noarch
 %description
 This package contains the basic directory layout for a Linux system, 
 including the proper permissions for the directories. This layout conforms
-to the Linux Filesystem Standard (FSSTND) 1.3.
+to the Filesystem Hierarchy Standard (FHS) 2.0.
 
 %description -l de
 Dieses Paket enthält die grundlegende Verzeichnisstruktur eines Linux-Systems,
 einschließlich der entsprechenden Zugriffsrechte. Diese Struktur entspricht
-dem Linux-Dateisystem-Standard (FSSTND) 1.3.
+dem Filesystem Hierarchy Standard (FHS) 2.0.
 
 %description -l fr
 Ce package contient l'arborescence type pour système linux
 y compris les permissions adéquates pour les répertoires. Cette
-arborescence est conforme au standard \"Linux Filesystem Standard\"
-(FSSTND) 1.3.
+arborescence est conforme au standard \"Filesystem Hierarchy Standard\"
+(FHS) 2.0.
 
 %description -l pl
 Pakiet ten zawiera informacje o podstawowej strukturze katalogów systemu i
@@ -42,17 +42,68 @@ metin dosyalarý yazýmý için yararlýdýr.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/{bin,boot,home/users} \
-	$RPM_BUILD_ROOT/etc/{X11/wmconfig,profile.d,security} \
+install -d $RPM_BUILD_ROOT/{bin,boot,home/users,opt} \
+	$RPM_BUILD_ROOT/etc/{X11/wmconfig,profile.d,security,opt} \
 	$RPM_BUILD_ROOT/lib/{modules,security} \
 	$RPM_BUILD_ROOT/{mnt/{floppy,cdrom},proc,root,sbin,tmp} \
-	$RPM_BUILD_ROOT/usr/{bin,dict,doc,etc,games,include,info,sbin,share} \
+	$RPM_BUILD_ROOT/usr/{bin,etc,games,include,sbin,share} \
+	$RPM_BUILD_ROOT/usr/share/{dict,doc,info,man,misc,games} \
 	$RPM_BUILD_ROOT/usr/{games,lib/games,man} \
-	$RPM_BUILD_ROOT/usr/local/{bin,etc,doc,games,info,lib,man,sbin,src} \
-	$RPM_BUILD_ROOT/var/{local,lock/subsys,log,run,preserve,spool/mail} \
-	$RPM_BUILD_ROOT/var/{lib/games,state}
+	$RPM_BUILD_ROOT/usr/local/{bin,games,share/{info,man,doc},lib,sbin,src} \
+	$RPM_BUILD_ROOT/var/{local,lock/subsys,log,run,preserve,mail,spool} \
+	$RPM_BUILD_ROOT/var/{games,state,tmp,db,opt}
 
-ln -sf ../tmp $RPM_BUILD_ROOT/var/tmp
+cd $RPM_BUILD_ROOT
+ln -s share/man 	usr/man
+ln -s share/man 	usr/X11R6/man
+ln -s share/man 	usr/local/man
+ln -s share/info 	usr/info
+ln -s state 		var/lib
+ln -s share/doc 	usr/doc
+ln -s share/doc 	usr/local/doc
+ln -s share/dict 	usr/dict
+
+%pre
+if [ -e /usr/man ] && [ ! -L /usr/man ]; then 
+	mkdir -p /usr/share/man
+	cp -a /usr/man/* /usr/share/man || :
+	rm -rf /usr/man
+fi 
+if [ -e /usr/X11R6/man ] && [ ! -L /usr/X11R6/man ]; then 
+	mkdir -p /usr/X11R6/share/man
+	cp -a /usr/X11R6/man/* /usr/X11R6/share/man
+	rm -rf /usr/X11R6/man
+fi 
+if [ -e /usr/local/man ] && [ ! -L /usr/local/man ]; then 
+	mkdir -p /usr/local/share/man
+	cp -a /usr/local/man/* /usr/local/share/man || :
+	rm -rf /usr/local/man
+fi 
+if [ -e /usr/info ] && [ ! -L /usr/info ]; then 
+	mkdir -p /usr/share/info
+	cp -a /usr/info/* /usr/share/info || :
+	rm -rf /usr/info
+fi 
+if [ -e /usr/doc ] && [ ! -L /usr/doc ]; then 
+	mkdir -p /usr/share/doc
+	cp -a /usr/doc/* /usr/share/doc || :
+	rm -rf /usr/doc
+fi 
+if [ -e /usr/local/doc ] && [ ! -L /usr/local/doc ]; then 
+	mkdir -p /usr/local/share/doc
+	cp -a /usr/local/doc/* /usr/local/share/doc
+	rm -rf /usr/local/doc
+fi 
+if [ -e /usr/dict ] && [ ! -L /usr/dict ]; then 
+	mkdir -p /usr/share/dict
+	cp -a /usr/dict/* /usr/share/dict || :
+	rm -rf /usr/dict
+fi 
+if [ -e /var/lib ] && [ ! -L /var/lib ]; then 
+	mkdir -p /var/state
+	cp -a /var/lib/* /var/state
+	rm -rf /var/lib
+fi 
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -62,22 +113,26 @@ rm -rf $RPM_BUILD_ROOT
 %dir /bin
 %attr(700,root,root) /boot
 %dir /etc
-%dir /etc/security
+%attr(751,root,root) %dir /etc/security
 %dir /etc/profile.d
-%dir /home
-%dir /lib
-%dir /lib/security
-%dir /mnt
+%dir /etc/opt
+%dir /etc/X11
+%dir /etc/X11/wmconfig
+/home
+/lib
+/mnt
 %attr(555,root,root) /proc
 %attr(700,root,root) /root
 %dir /sbin
 %attr(1777,root,root) /tmp
-%dir /usr
+/usr
 %dir /var
+%dir /var/db
+%dir /var/state
 %dir /var/lib
 %dir /var/local
 %dir /var/lock
-%attr(711,root,root) /var/log
+%attr(751,root,root) /var/log
 %dir /var/run
 %dir /var/preserve
 %dir /var/spool
