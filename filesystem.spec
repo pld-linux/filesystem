@@ -42,7 +42,7 @@ metin dosyalarý yazýmý için yararlýdýr.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/{bin,boot,home/{ftp,httpd,users},opt} \
+install -d $RPM_BUILD_ROOT/{bin,boot,home/users,opt} \
 	$RPM_BUILD_ROOT/etc/{X11/wmconfig,profile.d,security,opt} \
 	$RPM_BUILD_ROOT/lib/{modules,security} \
 	$RPM_BUILD_ROOT/{mnt/{floppy,cdrom},proc,root,sbin,tmp} \
@@ -50,17 +50,17 @@ install -d $RPM_BUILD_ROOT/{bin,boot,home/{ftp,httpd,users},opt} \
 	$RPM_BUILD_ROOT/usr/share/{dict,doc,info,man,misc,games,fonts} \
 	$RPM_BUILD_ROOT/usr/{games,lib/games} \
 	$RPM_BUILD_ROOT/usr/local/{bin,games,share/{info,man,doc},lib,sbin,src} \
-	$RPM_BUILD_ROOT/var/{local,lock/subsys,log,run,preserve,spool/{mail,lpd,uucp}} \
-	$RPM_BUILD_ROOT/var/{games,state,tmp,db,opt,adm} 
+	$RPM_BUILD_ROOT/var/{local,lock/subsys,log,run,preserve,spool} \
+	$RPM_BUILD_ROOT/var/{games,state,tmp,db,opt}
 
-#ln -sf share/man 	$RPM_BUILD_ROOT/usr/man
-#ln -sf share/man 	$RPM_BUILD_ROOT/usr/local/man
-#ln -sf share/info 	$RPM_BUILD_ROOT/usr/info
-#ln -sf state		$RPM_BUILD_ROOT/var/lib
-#ln -sf share/doc 	$RPM_BUILD_ROOT/usr/doc
-#ln -sf share/doc 	$RPM_BUILD_ROOT/usr/local/doc
-#ln -sf share/dict 	$RPM_BUILD_ROOT/usr/dict
-#ln -sf  log		$RPM_BUILD_ROOT/var/adm
+ln -sf share/man 	$RPM_BUILD_ROOT/usr/man
+ln -sf share/man 	$RPM_BUILD_ROOT/usr/local/man
+ln -sf share/info 	$RPM_BUILD_ROOT/usr/info
+ln -sf state		$RPM_BUILD_ROOT/var/lib
+ln -sf share/doc 	$RPM_BUILD_ROOT/usr/doc
+ln -sf share/doc 	$RPM_BUILD_ROOT/usr/local/doc
+ln -sf share/dict 	$RPM_BUILD_ROOT/usr/dict
+ln -sf  log		$RPM_BUILD_ROOT/var/adm
 
 %pre
 if [ -e /usr/man ] && [ ! -L /usr/man ]; then 
@@ -144,82 +144,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(1777,root,root) %dir /var/tmp
 
 %changelog
-* Wed May 19 1999 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
-- fixed some directories ... -- look in setup/passwd file ..
-  (wywaliæ ten wpis, przed fina³ow± przebudow± !)
-- added /opt (commercial software) && /var/adm 
-  (wywaliæ wszelkie linkowania, na razie s± zakomentowane)
- 
-* Thu May  6 1999 Artur Frysiak <wiget@pld.org.pl>
-  [1.5-1]
-- modyfications for FHS 2.0.
-
-* Tue Apr 20 1999 Piotr Czerwiñski <pius@pld.org.pl>
-  [1.4-8]
-- recompiled on rpm 3.
-
-* Wed Mar 31 1999 Piotr Czerwiñski <pius@pld.org.pl>
-  [1.4-7]
-- added /etc/X11/wmconfig.
-
-* Thu Feb 23 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [1.4-6]
-- added /etc/X11.
-
-* Sun Feb 21 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [1.4-5]
-- removed /usr/tmp (not neccessary),
-- added /usr/src,
-- removed many directories which must belongs to other packages
-  (webserwer, ftpdaemon, smtpdaemon, gopher serwer, petidomo),
-- simplification in %files,
-- changed GUID on man directorirs to root.
-
-* Wed Dec 30 1998 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
-  [1.4-3d]
-- changed permissions of /boot to 711  
-  (System.map must be readable by new ps),
-- added /var/spool/{news,lpd,uucp},
-- added /var/qmail,
-- all symlinks are now as %ghost,
-- added /var/lock/subsys,
-- added /usr/X11R6/man/* & /usr/man/man/*,
-- fixed permission of /var/spool/mail,
-- added /etc/mail && /home/ftp,
-- added /usr/lib/gopher-data && /usr/lib/games.
-
-* Mon Aug 10 1998 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
-  [1.4-1d]
-- changed relase to 1d (PLD-devel),
-- added /opt for commercial software,
-- /var/tmp as symlink to /tmp,
-- /var/adm as symlink to /var/log.
-
-* Mon Aug  10 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [1.4-1]
-- Buildroot changed to /tmp/%{name}-%%{version}-root,
-- directory skeleton is builded directly in %install instead unpacking 
-  from cpio archive,
-- translation modified for pl,
-- removed /usr/etc,
-- added /home/users - default base directory for users home
-  directories,
-- changed permission on /var/lib/rpm to 700,
-- changed perrmission on /root and /boot to 700,
-- changed permission on /var/log to 711,
-- changed permission on /var/spool/mail to 751,
-- removed /usr/lib/X11,
-- removed /var/nis.
-
-* Mon Apr 27 1998 Prospector System <bugs@redhat.com>
-- translations modified for de, fr, tr
-
-* Tue Sep 09 1997 Erik Troan <ewt@redhat.com>
-- made a noarch package
-
-* Wed Jul 09 1997 Erik Troan <ewt@redhat.com>
-- added /
-
-* Wed Apr 16 1997 Erik Troan <ewt@redhat.com>
-- Changed /proc to 555
-- Removed /var/spool/mqueue (which is owned by sendmail)
+* Wed May 19 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [1.5-2]
+- spec based on RH spec,
+- modified by: Artur Frysiak <wiget@pld.org.pl>, Piotr Czerwiñski
+  <pius@pld.org.pl>, Wojtek ¦lusarczyk <wojtek@shadow.eu.org> and Tomasz
+  K³oczko <kloczek@rudy.mif.pg.gda.pl>.
