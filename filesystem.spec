@@ -134,27 +134,3 @@ rm -rf $RPM_BUILD_ROOT
 %dir /var/state
 %dir /var/opt
 %attr(1777,root,root) %dir /var/tmp
-
-%changelog
-* Mon May 31 1999 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
-- added /usr/share/tmac, (for troff macros -- not distributed with groff)
-- removed /usr/share/fonts -- sorry, but not listed in FHS 2.0
-
-   filesystem still uder construction ;)
-
-* Sun May 30 1999 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
-
-- /usr/local/man instead /usr/local/share/man
-- removed /var/cache/man -- now man correct provides it.
-- added /usr/src && removed /usr/etc 
-- removed /usr/lib/games 
-- added /usr/local/include
-
-    Read FHS 2.0 for more details ...
- 
-* Wed May 19 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [1.5-2]
-- spec based on RH spec,
-- modified by: Artur Frysiak <wiget@pld.org.pl>, Piotr Czerwiñski
-  <pius@pld.org.pl>, Wojtek ¦lusarczyk <wojtek@shadow.eu.org> and Tomasz
-  K³oczko <kloczek@rudy.mif.pg.gda.pl>.
