@@ -130,7 +130,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(751,root,root) /var/log
 %dir /var/run
 %dir /var/crash
-%dir /var/mail
+%attr(1777,root,root) /var/mail
 /var/cache
 /var/spool
 /var/state
