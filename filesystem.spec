@@ -50,7 +50,7 @@ install -d $RPM_BUILD_ROOT/{bin,boot,home/users,opt} \
 	$RPM_BUILD_ROOT/usr/share/{dict,doc,info,man,misc,games,fonts} \
 	$RPM_BUILD_ROOT/usr/{games,lib/games} \
 	$RPM_BUILD_ROOT/usr/local/{bin,games,share/{info,man,doc},lib,sbin,src} \
-	$RPM_BUILD_ROOT/var/{local,lock/subsys,log,run,preserve,spool/mail} \
+	$RPM_BUILD_ROOT/var/{local,lock/subsys,log,run,preserve,spool/{mail,lpd,uucp}} \
 	$RPM_BUILD_ROOT/var/{games,state,tmp,db,opt,adm} 
 
 #ln -sf share/man 	$RPM_BUILD_ROOT/usr/man
