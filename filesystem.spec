@@ -8,7 +8,7 @@ Version:	1.5
 Release:	2
 Copyright:	Public Domain
 Group:		Base
-Group(pl):	Bazowe
+Group(pl):	Podstawowe
 Buildroot:	/tmp/%{name}-%{version}-root
 Prereq:		setup
 Buildarch:	noarch
