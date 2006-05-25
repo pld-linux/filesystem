@@ -5,7 +5,6 @@ Version:	3.0
 Release:	1
 License:	GPL
 Group:		Base
-URL:		http://www.pathname.com/fhs/
 Requires:	FHS >= 2.3-14.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
