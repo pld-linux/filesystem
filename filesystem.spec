@@ -1,3 +1,4 @@
+# TODO: move here from FHS.spec all dirs not covered by FHS, update descs
 Summary:	Common directories
 Summary(pl):	Wspólne katalogi
 Name:		filesystem
@@ -22,8 +23,12 @@ funkcjonalno¶æ programów, ale nie wymagaj±cych ich.
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/etc/{sysconfig,xdg} \
-	$RPM_BUILD_ROOT/usr/share/{sounds,pixmaps,icons,wm-properties,xsessions,wallpapers,themes/Default}
+	$RPM_BUILD_ROOT/usr/share/{sounds,pixmaps,icons,wm-properties,xsessions,wallpapers,themes/Default,pkgconfig} \
+	$RPM_BUILD_ROOT{%{_aclocaldir},%{_pkgconfigdir}}
 
+%if "%{_lib}" != "lib"
+install -d $RPM_BUILD_ROOT/usr/lib/pkgconfig
+%endif
 
 %clean
 cd $RPM_BUILD_ROOT
@@ -43,8 +48,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %dir /etc/sysconfig
 %dir /etc/xdg
+%dir %{_pkgconfigdir}
+%if "%{_lib}" != "lib"
+%dir /usr/lib/pkgconfig
+%endif
+%dir %{_aclocaldir}
 %dir /usr/share/icons
 %dir /usr/share/pixmaps
+%dir /usr/share/pkgconfig
 %dir /usr/share/sounds
 %dir /usr/share/themes
 %dir /usr/share/themes/Default
