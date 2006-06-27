@@ -3,7 +3,7 @@ Summary:	Common directories
 Summary(pl):	Wspólne katalogi
 Name:		filesystem
 Version:	3.0
-Release:	2
+Release:	3
 License:	GPL
 Group:		Base
 Requires:	FHS >= 2.3-14.2
