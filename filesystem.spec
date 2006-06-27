@@ -24,7 +24,8 @@ rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/etc/{sysconfig,xdg} \
 	$RPM_BUILD_ROOT/usr/share/{sounds,pixmaps,icons,wm-properties,xsessions,wallpapers,themes/Default,pkgconfig} \
-	$RPM_BUILD_ROOT{%{_aclocaldir},%{_pkgconfigdir}}
+	$RPM_BUILD_ROOT{%{_aclocaldir},%{_pkgconfigdir}} \
+	$RPM_BUILD_ROOT{%{_libdir}/debug/usr/{bin,lib,sbin},%{_prefix}/src/debug}
 
 %if "%{_lib}" != "lib"
 install -d $RPM_BUILD_ROOT/usr/lib/pkgconfig
@@ -62,3 +63,10 @@ rm -rf $RPM_BUILD_ROOT
 %dir /usr/share/wallpapers
 %dir /usr/share/wm-properties
 %dir /usr/share/xsessions
+
+%dir %{_libdir}/debug
+%dir %{_libdir}/debug/usr
+%dir %{_libdir}/debug/usr/bin
+%dir %{_libdir}/debug/usr/lib
+%dir %{_libdir}/debug/usr/sbin
+%dir %{_prefix}/src/debug
