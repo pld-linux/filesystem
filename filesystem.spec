@@ -1,9 +1,14 @@
+#
 # TODO: move here from FHS.spec all dirs not covered by FHS, update descs
+#
+
+%define		_enable_debug_packages	0
+
 Summary:	Common directories
 Summary(pl):	Wspólne katalogi
 Name:		filesystem
 Version:	3.0
-Release:	4
+Release:	4.1
 License:	GPL
 Group:		Base
 Requires:	FHS >= 2.3-14.2
@@ -17,13 +22,23 @@ some programs functionality, but don't require them themselves.
 Ten pakiet zawiera wspólne katalogi dla pakietów rozszerzaj±cych
 funkcjonalno¶æ programów, ale nie wymagaj±cych ich.
 
+%package debuginfo
+Summary:	Common directories for debug information
+Group:		Development/Debug
+Requires:	%{name} = %{version}-%{release}
+
+%description debuginfo
+This package provides common directories for debug information.
+
 %prep
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/etc/{sysconfig,xdg} \
-	$RPM_BUILD_ROOT/usr/share/{sounds,pixmaps,icons,wm-properties,xsessions,wallpapers,themes/Default,pkgconfig} \
+	$RPM_BUILD_ROOT%{_prefix}/share/{sounds,pixmaps,icons,wm-properties,xsessions,wallpapers,themes/Default,pkgconfig} \
+	$RPM_BUILD_ROOT%{_prefix}/lib/debug \
+	$RPM_BUILD_ROOT%{_usrsrc}/debug \
 	$RPM_BUILD_ROOT{%{_aclocaldir},%{_pkgconfigdir}}
 
 %if "%{_lib}" != "lib"
@@ -62,3 +77,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir /usr/share/wallpapers
 %dir /usr/share/wm-properties
 %dir /usr/share/xsessions
+
+%files debuginfo
+%defattr(644,root,root,755)
+%dir %{_prefix}/lib/debug
+%dir %{_usrsrc}/debug
