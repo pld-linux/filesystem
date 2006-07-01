@@ -24,11 +24,16 @@ funkcjonalno¶æ programów, ale nie wymagaj±cych ich.
 
 %package debuginfo
 Summary:	Common directories for debug information
+Summary(pl):	Wspólne katalogi dla plików z informacjami dla debuggera
 Group:		Development/Debug
 Requires:	%{name} = %{version}-%{release}
 
 %description debuginfo
 This package provides common directories for debug information.
+
+%description debuginfo -l pl
+Ten pakiet udostêpnia wspólne katalogi dla plików z informacjami dla
+debuggera.
 
 %prep
 
