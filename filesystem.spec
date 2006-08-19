@@ -76,6 +76,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir /usr/lib/pkgconfig
 %endif
 %dir %{_aclocaldir}
+%dir /usr/share/gnome
+%dir /usr/share/gnome/help
 %dir /usr/share/icons
 %dir /usr/share/pixmaps
 %dir /usr/share/pkgconfig
