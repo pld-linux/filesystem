@@ -41,7 +41,7 @@ debuggera.
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/etc/{sysconfig,xdg} \
-	$RPM_BUILD_ROOT%{_prefix}/share/{sounds,pixmaps,icons,wm-properties,xsessions,wallpapers,themes/Default,pkgconfig} \
+	$RPM_BUILD_ROOT%{_prefix}/share/{gnome/help,icons,pixmaps,pkgconfig,sounds,themes/Default,wallpapers,wm-properties,xsessions} \
 	$RPM_BUILD_ROOT%{_prefix}/lib/debug \
 	$RPM_BUILD_ROOT%{_usrsrc}/debug \
 	$RPM_BUILD_ROOT{%{_aclocaldir},%{_pkgconfigdir}} \
