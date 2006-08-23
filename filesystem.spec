@@ -8,7 +8,7 @@ Summary:	Common directories
 Summary(pl):	Wspólne katalogi
 Name:		filesystem
 Version:	3.0
-Release:	8
+Release:	9
 License:	GPL
 Group:		Base
 Requires:	FHS >= 2.3-14.2
@@ -79,6 +79,7 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 %dir %{_aclocaldir}
 %dir %{_desktopdir}/docklets
+%dir /etc/sysconfig/wmstyle
 %dir /usr/share/gnome
 %dir /usr/share/gnome/help
 %dir /usr/share/icons
