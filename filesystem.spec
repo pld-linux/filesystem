@@ -8,7 +8,7 @@ Summary:	Common directories
 Summary(pl):	Wspólne katalogi
 Name:		filesystem
 Version:	3.0
-Release:	7
+Release:	8
 License:	GPL
 Group:		Base
 Requires:	FHS >= 2.3-14.2
@@ -46,7 +46,8 @@ install -d $RPM_BUILD_ROOT/etc/{sysconfig,xdg} \
 	$RPM_BUILD_ROOT%{_usrsrc}/debug \
 	$RPM_BUILD_ROOT{%{_aclocaldir},%{_pkgconfigdir}} \
 	$RPM_BUILD_ROOT/etc/X11/xinit/xinitrc.d \
-	$RPM_BUILD_ROOT%{_desktopdir}/docklets
+	$RPM_BUILD_ROOT%{_desktopdir}/docklets \
+	$RPM_BUILD_ROOT/etc/sysconfig/wmstyle
 
 %if "%{_lib}" != "lib"
 install -d $RPM_BUILD_ROOT/usr/lib/pkgconfig
