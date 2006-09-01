@@ -8,7 +8,7 @@ Summary:	Common directories
 Summary(pl):	Wspólne katalogi
 Name:		filesystem
 Version:	3.0
-Release:	9
+Release:	10
 License:	GPL
 Group:		Base
 Requires:	FHS >= 2.3-14.2
@@ -40,7 +40,7 @@ debuggera.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/etc/{sysconfig,xdg} \
+install -d $RPM_BUILD_ROOT/etc/{sysconfig,xdg/autostart} \
 	$RPM_BUILD_ROOT%{_prefix}/share/{gnome/help,icons,pixmaps,pkgconfig,sounds,themes/Default,wallpapers,wm-properties,xsessions} \
 	$RPM_BUILD_ROOT%{_prefix}/lib/debug \
 	$RPM_BUILD_ROOT%{_usrsrc}/debug \
@@ -73,6 +73,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir /etc/X11/xinit
 %dir /etc/X11/xinit/xinitrc.d
 %dir /etc/xdg
+%dir /etc/xdg/autostart
 %dir %{_pkgconfigdir}
 %if "%{_lib}" != "lib"
 %dir /usr/lib/pkgconfig
