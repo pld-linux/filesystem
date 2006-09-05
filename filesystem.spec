@@ -1,12 +1,16 @@
 # TODO
 # - move here from FHS.spec all dirs not covered by FHS, update descs
-# - cnfl /usr/share/pkgconfig, /usr/lib/pkgconfig
-# - cnfl /usr/share/aclocal
-# - cnfl /etc/X11/xinit
-# - cnfl /usr/share/gnome, /usr/share/gnome/help
-# - cnfl /usr/share/applications/docklets
-# - cnfl /etc/sysconfig/wmstyle
-# - cnfl /usr/share/xsessions ?
+# - cnfl pkgconfig-0.20-1: /usr/lib/pkgconfig, /usr/share/pkgconfig
+# - cnfl automake-1.9.6-3: /usr/share/aclocal
+# - cnfl X11-6.9.0-11: /etc/X11/xinit
+# - cnfl libgnomeui-2.14.1-2: /usr/share/gnome, /usr/share/gnome/help
+# - cnfl applnk-1.9.5-20: /usr/share/applications/docklets
+# - cnfl X11-libs-6.9.0-11: /usr/share/icons, /usr/share/pixmaps,
+#        /usr/share/sounds, /usr/share/themes, /usr/share/themes/Default,
+#        /usr/share/wallpapers, /usr/share/wm-properties, /etc/xdg,
+#        /etc/sysconfig/wmstyle
+# - cnfl X11-libs-6.9.0-11: /usr/share/xsessions ?
+# - cnfl rc-scripts-0.4.0.27-1: /etc/sysconfig
 #
 Summary:	Common directories
 Summary(pl):	Wspólne katalogi
