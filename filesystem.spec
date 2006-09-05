@@ -1,18 +1,24 @@
+# TODO
+# - move here from FHS.spec all dirs not covered by FHS, update descs
+# - cnfl /usr/share/pkgconfig, /usr/lib/pkgconfig
+# - cnfl /usr/share/aclocal
+# - cnfl /etc/X11/xinit
+# - cnfl /usr/share/gnome, /usr/share/gnome/help
+# - cnfl /usr/share/applications/docklets
+# - cnfl /etc/sysconfig/wmstyle
+# - cnfl /usr/share/xsessions ?
 #
-# TODO: move here from FHS.spec all dirs not covered by FHS, update descs
-#
-
-%define		_enable_debug_packages	0
-
 Summary:	Common directories
 Summary(pl):	Wspólne katalogi
 Name:		filesystem
-Version:	3.0
-Release:	10
+Version:	2.0
+Release:	0.1
 License:	GPL
 Group:		Base
 Requires:	FHS >= 2.3-14.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		_xmandir	/usr/X11R6/man
 
 %description
 This package contains common directories for packages that extend
@@ -22,19 +28,6 @@ some programs functionality, but don't require them themselves.
 Ten pakiet zawiera wspólne katalogi dla pakietów rozszerzaj±cych
 funkcjonalno¶æ programów, ale nie wymagaj±cych ich.
 
-%package debuginfo
-Summary:	Common directories for debug information
-Summary(pl):	Wspólne katalogi dla plików z informacjami dla debuggera
-Group:		Development/Debug
-Requires:	%{name} = %{version}-%{release}
-
-%description debuginfo
-This package provides common directories for debug information.
-
-%description debuginfo -l pl
-Ten pakiet udostêpnia wspólne katalogi dla plików z informacjami dla
-debuggera.
-
 %prep
 
 %install
@@ -42,8 +35,6 @@ rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/etc/{sysconfig,xdg/autostart} \
 	$RPM_BUILD_ROOT%{_prefix}/share/{gnome/help,icons,pixmaps,pkgconfig,sounds,themes/Default,wallpapers,wm-properties,xsessions} \
-	$RPM_BUILD_ROOT%{_prefix}/lib/debug \
-	$RPM_BUILD_ROOT%{_usrsrc}/debug \
 	$RPM_BUILD_ROOT{%{_aclocaldir},%{_pkgconfigdir}} \
 	$RPM_BUILD_ROOT/etc/X11/xinit/xinitrc.d \
 	$RPM_BUILD_ROOT%{_desktopdir}/docklets \
@@ -52,6 +43,15 @@ install -d $RPM_BUILD_ROOT/etc/{sysconfig,xdg/autostart} \
 %if "%{_lib}" != "lib"
 install -d $RPM_BUILD_ROOT/usr/lib/pkgconfig
 %endif
+
+# X11
+install -d $RPM_BUILD_ROOT/usr/X11R6/share
+for manp in man{1,2,3,4,5,6,7,8} ; do
+	install -d $RPM_BUILD_ROOT%{_xmandir}/${manp}
+	for mloc in it ko pl; do
+		install -d $RPM_BUILD_ROOT%{_xmandir}/${mloc}/${manp}
+	done
+done
 
 %clean
 cd $RPM_BUILD_ROOT
@@ -93,7 +93,10 @@ rm -rf $RPM_BUILD_ROOT
 %dir /usr/share/wm-properties
 %dir /usr/share/xsessions
 
-%files debuginfo
-%defattr(644,root,root,755)
-%dir %{_prefix}/lib/debug
-%dir %{_usrsrc}/debug
+%dir /usr/X11R6
+%dir %{_xmandir}
+%{_xmandir}/man*
+%lang(it) %{_xmandir}/it
+%lang(ko) %{_xmandir}/ko
+%lang(pl) %{_xmandir}/pl
+%dir /usr/X11R6/share
