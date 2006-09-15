@@ -12,6 +12,7 @@ Release:	10
 License:	GPL
 Group:		Base
 Requires:	FHS >= 2.3-14.2
+BuildRequires:	automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
