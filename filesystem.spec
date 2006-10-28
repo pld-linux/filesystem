@@ -5,7 +5,7 @@ Summary:	Common directories
 Summary(pl):	Wspólne katalogi
 Name:		filesystem
 Version:	3.0
-Release:	11
+Release:	12
 License:	GPL
 Group:		Base
 BuildRequires:	automake
