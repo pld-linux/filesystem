@@ -1,11 +1,21 @@
-
-%define		_enable_debug_packages	0
-
+# TODO
+# - move X11R6 to FHS? (or keep them here for the sake of easier maintenance)
+# - cnfl pkgconfig-0.20-1: /usr/lib/pkgconfig, /usr/share/pkgconfig
+# - cnfl automake-1.9.6-3: /usr/share/aclocal
+# - cnfl X11-6.9.0-11: /etc/X11/xinit
+# - cnfl libgnomeui-2.14.1-2: /usr/share/gnome, /usr/share/gnome/help
+# - cnfl applnk-1.9.5-20: /usr/share/applications/docklets
+# - cnfl X11-libs-6.9.0-11: /usr/share/icons, /usr/share/pixmaps,
+#        /usr/share/sounds, /usr/share/themes, /usr/share/themes/Default,
+#        /usr/share/wallpapers, /usr/share/wm-properties, /etc/xdg,
+#        /etc/sysconfig/wmstyle
+# - cnfl X11-libs-6.9.0-11: /usr/share/xsessions ?
+# - cnfl rc-scripts-0.4.0.27-1: /etc/sysconfig
 Summary:	Common directories
 Summary(pl):	Wspólne katalogi
 Name:		filesystem
-Version:	3.0
-Release:	11
+Version:	2.0
+Release:	0.2
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -16,6 +26,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_privsepdir	/usr/share/empty
 # directory for *.idl files (for CORBA implementations)
 %define		_idldir		/usr/share/idl
+%define		_xmandir	/usr/X11R6/man
 
 %description
 This package contains common directories for packages that extend
@@ -24,19 +35,6 @@ some programs functionality, but don't require them themselves.
 %description -l pl
 Ten pakiet zawiera wspólne katalogi dla pakietów rozszerzaj±cych
 funkcjonalno¶æ programów, ale nie wymagaj±cych ich.
-
-%package debuginfo
-Summary:	Common directories for debug information
-Summary(pl):	Wspólne katalogi dla plików z informacjami dla debuggera
-Group:		Development/Debug
-Requires:	%{name} = %{version}-%{release}
-
-%description debuginfo
-This package provides common directories for debug information.
-
-%description debuginfo -l pl
-Ten pakiet udostêpnia wspólne katalogi dla plików z informacjami dla
-debuggera.
 
 %prep
 
@@ -49,9 +47,9 @@ install -d \
 	$RPM_BUILD_ROOT/home/{users,services} \
 	$RPM_BUILD_ROOT/lib/{firmware,security} \
 	$RPM_BUILD_ROOT/usr/include/security \
-	$RPM_BUILD_ROOT/usr/lib/{cgi-bin,debug,pkgconfig} \
+	$RPM_BUILD_ROOT/usr/lib/{cgi-bin,pkgconfig} \
 	$RPM_BUILD_ROOT/usr/share/{gnome/help,man/man{n,l},man/pl/mann,pkgconfig,sounds,themes/Default,wallpapers,wm-properties,xsessions} \
-	$RPM_BUILD_ROOT/usr/src/{debug,examples} \
+	$RPM_BUILD_ROOT/usr/src/examples \
 	$RPM_BUILD_ROOT/var/lock/subsys \
 	$RPM_BUILD_ROOT{%{_aclocaldir},%{_desktopdir}/docklets,%{_iconsdir},%{_pixmapsdir}} \
 	$RPM_BUILD_ROOT%{_fontsdir}/{{100,75}dpi,OTF,Speedo,Type1/{afm,pfm},TTF,cyrillic,local,misc} \
@@ -63,19 +61,27 @@ install -d \
 	$RPM_BUILD_ROOT/usr/lib64/pkgconfig
 %endif
 
+# X11
+install -d $RPM_BUILD_ROOT/usr/X11R6/share
+for manp in man{1,2,3,4,5,6,7,8} ; do
+	install -d $RPM_BUILD_ROOT%{_xmandir}/${manp}
+	for mloc in it ko pl; do
+		install -d $RPM_BUILD_ROOT%{_xmandir}/${mloc}/${manp}
+	done
+done
+
 %clean
 cd $RPM_BUILD_ROOT
 
 # %{_rpmfilename} is not expanded, so use
 # %{name}-%{version}-%{release}.%{buildarch}.rpm
 RPMFILE=%{name}-%{version}-%{release}.%{_target_cpu}.rpm
-RPMFILE2=%{name}-debuginfo-%{version}-%{release}.%{_target_cpu}.rpm
 TMPFILE=%{name}-%{version}.tmp$$
 # note: we must exclude from check all existing dirs belonging to FHS
 find . | sed -e 's|^\.||g' -e 's|^$||g' | sort | grep -v $TMPFILE | grep -E -v '^/(etc|etc/X11|home|lib|lib64|usr|usr/include|usr/lib|usr/lib64|usr/share|usr/share/man|usr/share/man/pl|usr/src|var|var/lock)$' > $TMPFILE
 
 # find finds also '.', so use option -B for diff
-rpm -qpl %{_rpmdir}/$RPMFILE %{_rpmdir}/$RPMFILE2 | grep -v '^/$' | sort | diff -uB $TMPFILE - || :
+rpm -qpl %{_rpmdir}/$RPMFILE | grep -v '^/$' | sort | diff -uB $TMPFILE - || :
 
 rm -rf $RPM_BUILD_ROOT
 
@@ -125,7 +131,10 @@ rm -rf $RPM_BUILD_ROOT
 %dir /usr/lib64/pkgconfig
 %endif
 
-%files debuginfo
-%defattr(644,root,root,755)
-%dir /usr/lib/debug
-%dir /usr/src/debug
+%dir /usr/X11R6
+%dir %{_xmandir}
+%{_xmandir}/man*
+%lang(it) %{_xmandir}/it
+%lang(ko) %{_xmandir}/ko
+%lang(pl) %{_xmandir}/pl
+%dir /usr/X11R6/share
