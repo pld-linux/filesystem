@@ -59,7 +59,7 @@ install -d \
 
 %if "%{_lib}" == "lib64"
 install -d \
-	$RPM_BUILD_ROOT/lib64/security
+	$RPM_BUILD_ROOT/lib64/security \
 	$RPM_BUILD_ROOT/usr/lib64/pkgconfig
 %endif
 
