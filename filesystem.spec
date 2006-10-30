@@ -1,5 +1,4 @@
 # TODO
-# - move X11R6 to FHS? (or keep them here for the sake of easier maintenance)
 # - cnfl pkgconfig-0.20-1: /usr/lib/pkgconfig, /usr/share/pkgconfig
 # - cnfl automake-1.9.6-3: /usr/share/aclocal
 # - cnfl X11-6.9.0-11: /etc/X11/xinit
@@ -15,7 +14,7 @@ Summary:	Common directories
 Summary(pl):	Wspólne katalogi
 Name:		filesystem
 Version:	2.0
-Release:	0.2
+Release:	1
 License:	GPL
 Group:		Base
 BuildRequires:	automake
