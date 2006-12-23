@@ -58,8 +58,8 @@ install -d \
 	$RPM_BUILD_ROOT%{_fontsdir}/{{100,75}dpi,OTF,Speedo,Type1/{afm,pfm},TTF,cyrillic,local,misc} \
 	$RPM_BUILD_ROOT{%{_idldir},%{_privsepdir}}
 
-%if "%{_lib}" == "lib64"
 install -d \
+%if "%{_lib}" == "lib64"
 	$RPM_BUILD_ROOT/lib64/security \
 	$RPM_BUILD_ROOT/usr/lib64/pkgconfig \
 	$RPM_BUILD_ROOT/usr/lib64/browser-plugins
