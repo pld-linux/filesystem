@@ -10,6 +10,7 @@ License:	GPL
 Group:		Base
 BuildRequires:	automake
 Requires:	FHS >= 2.3-15
+Provides:	browser-plugins(%{_target_base_arch})
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # directory for "privilege separation" chroot
@@ -18,8 +19,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_idldir		/usr/share/idl
 
 %description
-This package contains common directories for packages that extend
-some programs functionality, but don't require them themselves.
+This package contains common directories for packages that extend some
+programs functionality, but don't require them themselves.
 
 %description -l pl
 Ten pakiet zawiera wspólne katalogi dla pakietów rozszerzaj±cych
