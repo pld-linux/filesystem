@@ -1,14 +1,13 @@
-# TODO
-# - cnfl rc-scripts-0.4.0.27-1: /etc/sysconfig
 Summary:	Common directories
 Summary(pl):	Wspólne katalogi
 Name:		filesystem
 Version:	2.0
-Release:	1
+Release:	2
 License:	GPL
 Group:		Base
 BuildRequires:	automake
 Requires:	FHS >= 2.3-15
+Provides:	browser-plugins(%{_target_base_arch})
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # directory for "privilege separation" chroot
@@ -18,8 +17,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_xmandir	/usr/X11R6/man
 
 %description
-This package contains common directories for packages that extend
-some programs functionality, but don't require them themselves.
+This package contains common directories for packages that extend some
+programs functionality, but don't require them themselves.
 
 %description -l pl
 Ten pakiet zawiera wspólne katalogi dla pakietów rozszerzaj±cych
@@ -47,7 +46,10 @@ install -d \
 %if "%{_lib}" == "lib64"
 install -d \
 	$RPM_BUILD_ROOT/lib64/security \
-	$RPM_BUILD_ROOT/usr/lib64/pkgconfig
+	$RPM_BUILD_ROOT/usr/lib64/pkgconfig \
+	$RPM_BUILD_ROOT/usr/lib64/browser-plugins
+%else
+	$RPM_BUILD_ROOT/usr/lib/browser-plugins
 %endif
 
 # X11
@@ -118,6 +120,9 @@ rm -rf $RPM_BUILD_ROOT
 %if "%{_lib}" == "lib64"
 %dir /lib64/security
 %dir /usr/lib64/pkgconfig
+%dir /usr/lib64/browser-plugins
+%else
+%dir /usr/lib/browser-plugins
 %endif
 
 %dir /usr/X11R6
