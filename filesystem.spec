@@ -2,7 +2,7 @@
 %define		_enable_debug_packages	0
 
 Summary:	Common directories
-Summary(pl.UTF-8):   Wspólne katalogi
+Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	3.0
 Release:	14
@@ -40,7 +40,7 @@ funkcjonalność programów, ale nie wymagających ich.
 
 %package debuginfo
 Summary:	Common directories for debug information
-Summary(pl.UTF-8):   Wspólne katalogi dla plików z informacjami dla debuggera
+Summary(pl.UTF-8):	Wspólne katalogi dla plików z informacjami dla debuggera
 Group:		Development/Debug
 Requires:	%{name} = %{version}-%{release}
 
