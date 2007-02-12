@@ -2,7 +2,7 @@
 %define		_enable_debug_packages	0
 
 Summary:	Common directories
-Summary(pl):	Wsp髄ne katalogi
+Summary(pl.UTF-8):   Wsp贸lne katalogi
 Name:		filesystem
 Version:	3.0
 Release:	14
@@ -34,21 +34,21 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 This package contains common directories for packages that extend some
 programs functionality, but don't require them themselves.
 
-%description -l pl
-Ten pakiet zawiera wsp髄ne katalogi dla pakiet體 rozszerzaj眂ych
-funkcjonalno舵 program體, ale nie wymagaj眂ych ich.
+%description -l pl.UTF-8
+Ten pakiet zawiera wsp贸lne katalogi dla pakiet贸w rozszerzaj膮cych
+funkcjonalno艣膰 program贸w, ale nie wymagaj膮cych ich.
 
 %package debuginfo
 Summary:	Common directories for debug information
-Summary(pl):	Wsp髄ne katalogi dla plik體 z informacjami dla debuggera
+Summary(pl.UTF-8):   Wsp贸lne katalogi dla plik贸w z informacjami dla debuggera
 Group:		Development/Debug
 Requires:	%{name} = %{version}-%{release}
 
 %description debuginfo
 This package provides common directories for debug information.
 
-%description debuginfo -l pl
-Ten pakiet udost阷nia wsp髄ne katalogi dla plik體 z informacjami dla
+%description debuginfo -l pl.UTF-8
+Ten pakiet udost臋pnia wsp贸lne katalogi dla plik贸w z informacjami dla
 debuggera.
 
 %prep
