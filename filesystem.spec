@@ -2,7 +2,7 @@ Summary:	Common directories
 Summary(pl):	Wspólne katalogi
 Name:		filesystem
 Version:	2.0
-Release:	5
+Release:	6
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -98,7 +98,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir /etc/xdg/autostart
 %dir /home/users
 %attr(751,root,adm) %dir /home/services
-%ghost %dir /initrd
+%dir /initrd
 %dir /lib/firmware
 %dir /lib/security
 %dir /selinux
