@@ -5,7 +5,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	3.0
-Release:	14
+Release:	15
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -62,7 +62,7 @@ install -d \
 	$RPM_BUILD_ROOT/home/{users,services} \
 	$RPM_BUILD_ROOT/lib/{firmware,security} \
 	$RPM_BUILD_ROOT/usr/include/security \
-	$RPM_BUILD_ROOT/usr/lib/{cgi-bin,browser-plugins,debug,pkgconfig} \
+	$RPM_BUILD_ROOT/usr/lib/{cgi-bin,browser-plugins,debug%{_libdir},pkgconfig} \
 	$RPM_BUILD_ROOT/usr/share/{gnome/help,man/man{n,l},man/pl/mann,pkgconfig,sounds,themes/Default,wallpapers,wm-properties,xsessions} \
 	$RPM_BUILD_ROOT/usr/src/{debug,examples} \
 	$RPM_BUILD_ROOT/var/lock/subsys \
@@ -144,4 +144,5 @@ rm -rf $RPM_BUILD_ROOT
 %files debuginfo
 %defattr(644,root,root,755)
 %dir /usr/lib/debug
+/usr/lib/debug/*
 %dir /usr/src/debug
