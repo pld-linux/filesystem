@@ -16,7 +16,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	3.0
-Release:	15
+Release:	16
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -93,6 +93,8 @@ install -d \
 install -d \
 	$RPM_BUILD_ROOT/usr/lib/debug/%{_lib} \
 	$RPM_BUILD_ROOT/usr/lib/debug%{_libdir} \
+	$RPM_BUILD_ROOT/usr/lib/debug/{bin,sbin} \
+	$RPM_BUILD_ROOT/usr/lib/debug/usr/{bin,sbin} \
 	$RPM_BUILD_ROOT/usr/lib/debug/lib/security \
 	$RPM_BUILD_ROOT/usr/src/debug
 
@@ -102,7 +104,7 @@ install -d \
 %endif
 
 find $RPM_BUILD_ROOT/usr/lib/debug -type d | while read line; do
-	echo "%exclude %dir ${line#$RPM_BUILD_ROOT}"
+	echo ${line#$RPM_BUILD_ROOT}
 done > $RPM_BUILD_ROOT/usr/src/debug/%{name}-debuginfo.files
 %endif
 
