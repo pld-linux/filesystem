@@ -3,13 +3,15 @@
 %bcond_without	debuginfo	# build without debuginfo package
 
 # disable bcond if debuginfo is disabled from rpmmacros
-%if 0%{?_enable_debug_packages:1}
+%if %{expand:%%define __sip_%{?_enable_debug_packages} 1}0%{?__sip_0:1}%{expand:%%undefine __sip_%{?_enable_debug_packages}}
 %undefine	with_debuginfo
 %endif
 
 # disable rpm generated debug package in any way
 %define		_enable_debug_packages	0
 
+# avoid rpm 4.4.9 adding rm -rf buildroot
+%define		__spec_clean_body	%{nil}
 Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
@@ -61,6 +63,7 @@ Ten pakiet udostępnia wspólne katalogi dla plików z informacjami dla
 debuggera.
 
 %prep
+%setup -qcT
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -92,22 +95,26 @@ install -d \
 	$RPM_BUILD_ROOT/usr/lib64/browser-plugins
 %endif
 
+# create this for %clean
+tar -cf checkfiles.tar -C $RPM_BUILD_ROOT .
+
 %clean
+mkdir -p $RPM_BUILD_ROOT
+tar -xf checkfiles.tar -C $RPM_BUILD_ROOT
 cd $RPM_BUILD_ROOT
 
 # %{_rpmfilename} is not expanded, so use
 # %{name}-%{version}-%{release}.%{buildarch}.rpm
 RPMFILE=%{_rpmdir}/%{name}-%{version}-%{release}.%{_target_cpu}.rpm
 RPMFILE2=%{?with_debuginfo:%{_rpmdir}/%{name}-debuginfo-%{version}-%{release}.%{_target_cpu}.rpm}
-
-TMPFILE=%{name}-%{version}.tmp$$
+TMPFILE=$(mktemp)
 # note: we must exclude from check all existing dirs belonging to FHS
 find . | sed -e 's|^\.||g' -e 's|^$||g' | sort | grep -v $TMPFILE | grep -E -v '^/(etc|etc/X11|home|lib|lib64|usr|usr/include|usr/lib|usr/lib64|usr/share|usr/share/man|usr/share/man/pl|usr/src|var|var/lock)$' > $TMPFILE
 
 # find finds also '.', so use option -B for diff
 rpm -qpl $RPMFILE $RPMFILE2 | grep -v '^/$' | sort | diff -uB $TMPFILE - || :
 
-rm -rf $RPM_BUILD_ROOT
+rm -f $TMPFILE
 
 %files
 %defattr(644,root,root,755)
