@@ -1,4 +1,13 @@
+#
+# Conditional build:
+%bcond_without	debuginfo	# build without debuginfo package
 
+# disable bcond if debuginfo is disabled from rpmmacros
+%if 0%{?_enable_debug_packages:1}
+%undefine	with_debuginfo
+%endif
+
+# disable rpm generated debug package in any way
 %define		_enable_debug_packages	0
 
 Summary:	Common directories
@@ -62,13 +71,19 @@ install -d \
 	$RPM_BUILD_ROOT/home/{users,services} \
 	$RPM_BUILD_ROOT/lib/{firmware,security} \
 	$RPM_BUILD_ROOT/usr/include/security \
-	$RPM_BUILD_ROOT/usr/lib/{cgi-bin,browser-plugins,debug%{_libdir},pkgconfig} \
+	$RPM_BUILD_ROOT/usr/lib/{cgi-bin,browser-plugins,pkgconfig} \
 	$RPM_BUILD_ROOT/usr/share/{gnome/help,man/man{n,l},man/pl/mann,pkgconfig,sounds,themes/Default,wallpapers,wm-properties,xsessions} \
-	$RPM_BUILD_ROOT/usr/src/{debug,examples} \
+	$RPM_BUILD_ROOT/usr/src/examples \
 	$RPM_BUILD_ROOT/var/lock/subsys \
 	$RPM_BUILD_ROOT{%{_aclocaldir},%{_desktopdir}/docklets,%{_iconsdir},%{_pixmapsdir}} \
 	$RPM_BUILD_ROOT%{_fontsdir}/{{100,75}dpi,OTF,Speedo,Type1/{afm,pfm},TTF,cyrillic,local,misc} \
 	$RPM_BUILD_ROOT{%{_idldir},%{_privsepdir}}
+
+%if %{with debuginfo}
+install -d \
+	$RPM_BUILD_ROOT/usr/lib/debug%{_libdir} \
+	$RPM_BUILD_ROOT/usr/src/debug
+%endif
 
 %if "%{_lib}" == "lib64"
 install -d \
@@ -82,14 +97,15 @@ cd $RPM_BUILD_ROOT
 
 # %{_rpmfilename} is not expanded, so use
 # %{name}-%{version}-%{release}.%{buildarch}.rpm
-RPMFILE=%{name}-%{version}-%{release}.%{_target_cpu}.rpm
-RPMFILE2=%{name}-debuginfo-%{version}-%{release}.%{_target_cpu}.rpm
+RPMFILE=%{_rpmdir}/%{name}-%{version}-%{release}.%{_target_cpu}.rpm
+RPMFILE2=%{?with_debuginfo:%{_rpmdir}/%{name}-debuginfo-%{version}-%{release}.%{_target_cpu}.rpm}
+
 TMPFILE=%{name}-%{version}.tmp$$
 # note: we must exclude from check all existing dirs belonging to FHS
 find . | sed -e 's|^\.||g' -e 's|^$||g' | sort | grep -v $TMPFILE | grep -E -v '^/(etc|etc/X11|home|lib|lib64|usr|usr/include|usr/lib|usr/lib64|usr/share|usr/share/man|usr/share/man/pl|usr/src|var|var/lock)$' > $TMPFILE
 
 # find finds also '.', so use option -B for diff
-rpm -qpl %{_rpmdir}/$RPMFILE %{_rpmdir}/$RPMFILE2 | grep -v '^/$' | sort | diff -uB $TMPFILE - || :
+rpm -qpl $RPMFILE $RPMFILE2 | grep -v '^/$' | sort | diff -uB $TMPFILE - || :
 
 rm -rf $RPM_BUILD_ROOT
 
@@ -141,8 +157,10 @@ rm -rf $RPM_BUILD_ROOT
 %dir /usr/lib64/browser-plugins
 %endif
 
+%if %{with debuginfo}
 %files debuginfo
 %defattr(644,root,root,755)
 %dir /usr/lib/debug
 /usr/lib/debug/*
 %dir /usr/src/debug
+%endif
