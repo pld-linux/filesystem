@@ -82,17 +82,28 @@ install -d \
 	$RPM_BUILD_ROOT%{_fontsdir}/{{100,75}dpi,OTF,Speedo,Type1/{afm,pfm},TTF,cyrillic,local,misc} \
 	$RPM_BUILD_ROOT{%{_idldir},%{_privsepdir}}
 
-%if %{with debuginfo}
-install -d \
-	$RPM_BUILD_ROOT/usr/lib/debug%{_libdir} \
-	$RPM_BUILD_ROOT/usr/src/debug
-%endif
-
 %if "%{_lib}" == "lib64"
 install -d \
 	$RPM_BUILD_ROOT/lib64/security \
 	$RPM_BUILD_ROOT/usr/lib64/pkgconfig \
 	$RPM_BUILD_ROOT/usr/lib64/browser-plugins
+%endif
+
+%if %{with debuginfo}
+install -d \
+	$RPM_BUILD_ROOT/usr/lib/debug/%{_lib} \
+	$RPM_BUILD_ROOT/usr/lib/debug%{_libdir} \
+	$RPM_BUILD_ROOT/usr/lib/debug/lib/security \
+	$RPM_BUILD_ROOT/usr/src/debug
+
+%if "%{_lib}" == "lib64"
+install -d \
+	$RPM_BUILD_ROOT/usr/lib/debug/lib64/security
+%endif
+
+find $RPM_BUILD_ROOT/usr/lib/debug -type d | while read line; do
+	echo "%exclude %dir ${line#$RPM_BUILD_ROOT}"
+done > $RPM_BUILD_ROOT/usr/src/debug/%{name}-debuginfo.files
 %endif
 
 # create this for %clean
@@ -103,18 +114,22 @@ mkdir -p $RPM_BUILD_ROOT
 tar -xf checkfiles.tar -C $RPM_BUILD_ROOT
 cd $RPM_BUILD_ROOT
 
-# %{_rpmfilename} is not expanded, so use
-# %{name}-%{version}-%{release}.%{buildarch}.rpm
-RPMFILE=%{_rpmdir}/%{name}-%{version}-%{release}.%{_target_cpu}.rpm
-RPMFILE2=%{?with_debuginfo:%{_rpmdir}/%{name}-debuginfo-%{version}-%{release}.%{_target_cpu}.rpm}
-TMPFILE=$(mktemp)
-# note: we must exclude from check all existing dirs belonging to FHS
-find . | sed -e 's|^\.||g' -e 's|^$||g' | sort | grep -v $TMPFILE | grep -E -v '^/(etc|etc/X11|home|lib|lib64|usr|usr/include|usr/lib|usr/lib64|usr/share|usr/share/man|usr/share/man/pl|usr/src|var|var/lock)$' > $TMPFILE
+check_filesystem_dirs() {
+	# %{_rpmfilename} is not expanded, so use
+	# %{name}-%{version}-%{release}.%{buildarch}.rpm
+	RPMFILE=%{_rpmdir}/%{name}-%{version}-%{release}.%{_target_cpu}.rpm
+	RPMFILE2=%{?with_debuginfo:%{_rpmdir}/%{name}-debuginfo-%{version}-%{release}.%{_target_cpu}.rpm}
+	TMPFILE=$(mktemp)
+	# note: we must exclude from check all existing dirs belonging to FHS
+	find . | sed -e 's|^\.||g' -e 's|^$||g' | sort | grep -v $TMPFILE | grep -E -v '^/(etc|etc/X11|home|lib|lib64|usr|usr/include|usr/lib|usr/lib64|usr/share|usr/share/man|usr/share/man/pl|usr/src|var|var/lock)$' > $TMPFILE
 
-# find finds also '.', so use option -B for diff
-rpm -qpl $RPMFILE $RPMFILE2 | grep -v '^/$' | sort | diff -uB $TMPFILE - || :
+	# find finds also '.', so use option -B for diff
+	rpm -qpl $RPMFILE $RPMFILE2 | grep -v '^/$' | sort | diff -uB $TMPFILE - || :
 
-rm -f $TMPFILE
+	rm -f $TMPFILE
+}
+
+check_filesystem_dirs
 
 %files
 %defattr(644,root,root,755)
@@ -169,5 +184,7 @@ rm -f $TMPFILE
 %defattr(644,root,root,755)
 %dir /usr/lib/debug
 /usr/lib/debug/*
+
 %dir /usr/src/debug
+/usr/src/debug/filesystem-debuginfo.files
 %endif
