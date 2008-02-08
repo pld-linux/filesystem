@@ -20,6 +20,7 @@ Release:	16
 License:	GPL
 Group:		Base
 BuildRequires:	automake
+BuildRequires:	mktemp
 Requires:	FHS >= 2.3-15
 Provides:	browser-plugins(%{_target_base_arch})
 %ifarch %{x8664}
