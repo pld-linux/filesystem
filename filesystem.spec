@@ -1,5 +1,5 @@
 Summary:	Common directories
-Summary(pl):	Wsp髄ne katalogi
+Summary(pl.UTF-8):	Wsp贸lne katalogi
 Name:		filesystem
 Version:	2.0
 Release:	6
@@ -32,9 +32,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 This package contains common directories for packages that extend some
 programs functionality, but don't require them themselves.
 
-%description -l pl
-Ten pakiet zawiera wsp髄ne katalogi dla pakiet體 rozszerzaj眂ych
-funkcjonalno舵 program體, ale nie wymagaj眂ych ich.
+%description -l pl.UTF-8
+Ten pakiet zawiera wsp贸lne katalogi dla pakiet贸w rozszerzaj膮cych
+funkcjonalno艣膰 program贸w, ale nie wymagaj膮cych ich.
 
 %prep
 
