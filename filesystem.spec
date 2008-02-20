@@ -1,11 +1,26 @@
+#
+# Conditional build:
+%bcond_without	debuginfo	# build without debuginfo package
+
+# disable bcond if debuginfo is disabled from rpmmacros
+%if %{expand:%%define __sip_%{?_enable_debug_packages} 1}0%{?__sip_0:1}%{expand:%%undefine __sip_%{?_enable_debug_packages}}
+%undefine	with_debuginfo
+%endif
+
+# disable rpm generated debug package in any way
+%define		_enable_debug_packages	0
+
+# avoid rpm 4.4.9 adding rm -rf buildroot
+%define		__spec_clean_body	%{nil}
 Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	2.0
-Release:	6
+Release:	7
 License:	GPL
 Group:		Base
 BuildRequires:	automake
+BuildRequires:	mktemp
 Requires:	FHS >= 2.3-15
 Provides:	browser-plugins(%{_target_base_arch})
 %ifarch %{x8664}
@@ -36,7 +51,21 @@ programs functionality, but don't require them themselves.
 Ten pakiet zawiera wspólne katalogi dla pakietów rozszerzających
 funkcjonalność programów, ale nie wymagających ich.
 
+%package debuginfo
+Summary:	Common directories for debug information
+Summary(pl.UTF-8):	Wspólne katalogi dla plików z informacjami dla debuggera
+Group:		Development/Debug
+Requires:	%{name} = %{version}-%{release}
+
+%description debuginfo
+This package provides common directories for debug information.
+
+%description debuginfo -l pl.UTF-8
+Ten pakiet udostępnia wspólne katalogi dla plików z informacjami dla
+debuggera.
+
 %prep
+%setup -qcT
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -71,20 +100,47 @@ for manp in man{1,2,3,4,5,6,7,8} ; do
 	done
 done
 
+%if %{with debuginfo}
+install -d \
+	$RPM_BUILD_ROOT/usr/lib/debug/%{_lib} \
+	$RPM_BUILD_ROOT/usr/lib/debug%{_libdir} \
+	$RPM_BUILD_ROOT/usr/lib/debug/{bin,sbin} \
+	$RPM_BUILD_ROOT/usr/lib/debug/usr/{bin,sbin} \
+	$RPM_BUILD_ROOT/usr/lib/debug/lib/security \
+	$RPM_BUILD_ROOT/usr/src/debug
+
+%if "%{_lib}" == "lib64"
+install -d \
+	$RPM_BUILD_ROOT/usr/lib/debug/lib64/security
+%endif
+
+find $RPM_BUILD_ROOT/usr/lib/debug -type d | while read line; do
+	echo ${line#$RPM_BUILD_ROOT}
+done > $RPM_BUILD_ROOT/usr/src/debug/%{name}-debuginfo.files
+%endif
+
+# create this for %clean
+tar -cf checkfiles.tar -C $RPM_BUILD_ROOT .
+
 %clean
+mkdir -p $RPM_BUILD_ROOT
+tar -xf checkfiles.tar -C $RPM_BUILD_ROOT
 cd $RPM_BUILD_ROOT
 
-# %{_rpmfilename} is not expanded, so use
-# %{name}-%{version}-%{release}.%{buildarch}.rpm
-RPMFILE=%{name}-%{version}-%{release}.%{_target_cpu}.rpm
-TMPFILE=%{name}-%{version}.tmp$$
-# note: we must exclude from check all existing dirs belonging to FHS
-find . | sed -e 's|^\.||g' -e 's|^$||g' | sort | grep -v $TMPFILE | grep -E -v '^/(etc|etc/X11|home|lib|lib64|usr|usr/include|usr/lib|usr/lib64|usr/share|usr/share/man|usr/share/man/pl|usr/src|var|var/lock)$' > $TMPFILE
+check_filesystem_dirs() {
+	RPMFILE=%{_rpmdir}/%{name}-%{version}-%{release}.%{_target_cpu}.rpm
+	RPMFILE2=%{?with_debuginfo:%{_rpmdir}/%{name}-debuginfo-%{version}-%{release}.%{_target_cpu}.rpm}
+	TMPFILE=$(mktemp)
+	# note: we must exclude from check all existing dirs belonging to FHS
+	find | sed -e 's|^\.||g' -e 's|^$||g' | LC_ALL=C sort | grep -v $TMPFILE | grep -E -v '^/(etc|etc/X11|home|lib|lib64|usr|usr/include|usr/lib|usr/lib64|usr/share|usr/share/man|usr/share/man/pl|usr/src|var|var/lock)$' > $TMPFILE
 
-# find finds also '.', so use option -B for diff
-rpm -qpl %{_rpmdir}/$RPMFILE | grep -v '^/$' | sort | diff -uB $TMPFILE - || :
+	# find finds also '.', so use option -B for diff
+	rpm -qpl $RPMFILE $RPMFILE2 | grep -v '^/$' | LC_ALL=C sort | diff -uB $TMPFILE - || :
 
-rm -rf $RPM_BUILD_ROOT
+	rm -f $TMPFILE
+}
+
+check_filesystem_dirs
 
 %files
 %defattr(644,root,root,755)
@@ -141,3 +197,13 @@ rm -rf $RPM_BUILD_ROOT
 %lang(ko) %{_xmandir}/ko
 %lang(pl) %{_xmandir}/pl
 %dir /usr/X11R6/share
+
+%if %{with debuginfo}
+%files debuginfo
+%defattr(644,root,root,755)
+%dir /usr/lib/debug
+/usr/lib/debug/*
+
+%dir /usr/src/debug
+/usr/src/debug/filesystem-debuginfo.files
+%endif
