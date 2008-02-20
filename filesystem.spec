@@ -16,7 +16,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	3.0
-Release:	16
+Release:	17
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -144,7 +144,7 @@ check_filesystem_dirs
 %dir /etc/xdg/autostart
 %dir /home/users
 %attr(751,root,adm) %dir /home/services
-%ghost %dir /initrd
+%dir /initrd
 %dir /lib/firmware
 %dir /lib/security
 %dir /selinux
