@@ -11,7 +11,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	3.0
-Release:	19
+Release:	20
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -71,7 +71,7 @@ install -d \
 	$RPM_BUILD_ROOT/lib/{firmware,security} \
 	$RPM_BUILD_ROOT/usr/include/security \
 	$RPM_BUILD_ROOT/usr/lib/{cgi-bin,browser-plugins,pkgconfig} \
-	$RPM_BUILD_ROOT/usr/share/{gnome/help,man/man{n,l},man/pl/mann,pkgconfig,sounds,themes/Default,wallpapers,wm-properties,xsessions} \
+	$RPM_BUILD_ROOT/usr/share/{gnome/{help,wm-properties},man/man{n,l},man/pl/mann,pkgconfig,sounds,themes/Default,wallpapers,xsessions} \
 	$RPM_BUILD_ROOT/usr/src/examples \
 	$RPM_BUILD_ROOT/var/lock/subsys \
 	$RPM_BUILD_ROOT{%{_aclocaldir},%{_desktopdir}/docklets,%{_iconsdir},%{_pixmapsdir}} \
@@ -152,6 +152,7 @@ check_filesystem_dirs
 %dir /usr/lib/pkgconfig
 %dir /usr/share/gnome
 %dir /usr/share/gnome/help
+%dir /usr/share/gnome/wm-properties
 %dir /usr/share/man/man[nl]
 %lang(pl) %dir /usr/share/man/pl/mann
 %dir /usr/share/pkgconfig
@@ -159,7 +160,6 @@ check_filesystem_dirs
 %dir /usr/share/themes
 %dir /usr/share/themes/Default
 %dir /usr/share/wallpapers
-%dir /usr/share/wm-properties
 %dir /usr/share/xsessions
 %dir /usr/src/examples
 %attr(700,root,root) %dir /var/lock/subsys
