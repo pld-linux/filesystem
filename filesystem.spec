@@ -11,7 +11,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	3.0
-Release:	22
+Release:	23
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -70,7 +70,7 @@ install -d \
 	$RPM_BUILD_ROOT/home/{users,services} \
 	$RPM_BUILD_ROOT/lib/{firmware,security} \
 	$RPM_BUILD_ROOT/usr/include/security \
-	$RPM_BUILD_ROOT/usr/lib/{cgi-bin,browser-plugins,pkgconfig} \
+	$RPM_BUILD_ROOT/usr/lib/{cgi-bin,browser-plugins,pkgconfig,initrd} \
 	$RPM_BUILD_ROOT/usr/share/{gnome/{help,wm-properties},man/man{n,l},man/pl/mann,pkgconfig,sounds,themes/Default,wallpapers,xsessions} \
 	$RPM_BUILD_ROOT/usr/src/examples \
 	$RPM_BUILD_ROOT/var/lock/subsys \
@@ -82,7 +82,8 @@ install -d \
 install -d \
 	$RPM_BUILD_ROOT/lib64/security \
 	$RPM_BUILD_ROOT/usr/lib64/pkgconfig \
-	$RPM_BUILD_ROOT/usr/lib64/browser-plugins
+	$RPM_BUILD_ROOT/usr/lib64/browser-plugins \
+	$RPM_BUILD_ROOT/usr/lib64/initrd
 %endif
 
 %if %{with debuginfo}
@@ -151,6 +152,7 @@ check_filesystem_dirs
 %dir /usr/include/security
 %dir /usr/lib/browser-plugins
 %dir /usr/lib/cgi-bin
+%dir /usr/lib/initrd
 %dir /usr/lib/pkgconfig
 %dir /usr/share/gnome
 %dir /usr/share/gnome/help
@@ -175,8 +177,9 @@ check_filesystem_dirs
 %dir %{_privsepdir}
 %if "%{_lib}" == "lib64"
 %dir /lib64/security
-%dir /usr/lib64/pkgconfig
 %dir /usr/lib64/browser-plugins
+%dir /usr/lib64/initrd
+%dir /usr/lib64/pkgconfig
 %endif
 
 %if %{with debuginfo}
