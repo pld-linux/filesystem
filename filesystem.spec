@@ -49,7 +49,6 @@ funkcjonalność programów, ale nie wymagających ich.
 Summary:	Common directories for debug information
 Summary(pl.UTF-8):	Wspólne katalogi dla plików z informacjami dla debuggera
 Group:		Development/Debug
-Requires:	%{name} = %{version}-%{release}
 
 %description debuginfo
 This package provides common directories for debug information.
