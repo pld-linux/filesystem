@@ -11,7 +11,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	3.0
-Release:	24
+Release:	25
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -69,7 +69,7 @@ install -d \
 	$RPM_BUILD_ROOT/home/{users,services} \
 	$RPM_BUILD_ROOT/lib/{firmware,security} \
 	$RPM_BUILD_ROOT/usr/include/security \
-	$RPM_BUILD_ROOT/usr/lib/{cgi-bin,browser-plugins,pkgconfig,initrd} \
+	$RPM_BUILD_ROOT/usr/lib/{cgi-bin,browser-plugins,pkgconfig,initrd,ConsoleKit/run-session.d} \
 	$RPM_BUILD_ROOT/usr/share/{gnome/{help,wm-properties},man/man{n,l},man/pl/mann,pkgconfig,sounds,themes/Default,wallpapers,xsessions} \
 	$RPM_BUILD_ROOT/usr/src/examples \
 	$RPM_BUILD_ROOT/var/lock/subsys \
