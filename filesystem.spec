@@ -11,7 +11,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	3.0
-Release:	23
+Release:	24
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -149,6 +149,8 @@ check_filesystem_dirs
 %dir /selinux
 %dir /sys
 %dir /usr/include/security
+%dir /usr/lib/ConsoleKit
+%dir /usr/lib/ConsoleKit/run-session.d
 %dir /usr/lib/browser-plugins
 %dir /usr/lib/cgi-bin
 %dir /usr/lib/initrd
