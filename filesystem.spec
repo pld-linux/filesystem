@@ -1,6 +1,3 @@
-#
-# Conditional build:
-%bcond_without	debuginfo	# build without debuginfo package
 
 # disable rpm generated debug package, we handle it differently here
 %define		_enable_debug_packages	0
@@ -11,7 +8,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	3.0
-Release:	25
+Release:	26
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -30,6 +27,7 @@ Provides:	browser-plugins(s390)
 %ifarch sparc64
 Provides:	browser-plugins(sparc)
 %endif
+Obsoletes:	filesystem-debuginfo
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # directory for "privilege separation" chroot
@@ -44,18 +42,6 @@ programs functionality, but don't require them themselves.
 %description -l pl.UTF-8
 Ten pakiet zawiera wspólne katalogi dla pakietów rozszerzających
 funkcjonalność programów, ale nie wymagających ich.
-
-%package debuginfo
-Summary:	Common directories for debug information
-Summary(pl.UTF-8):	Wspólne katalogi dla plików z informacjami dla debuggera
-Group:		Development/Debug
-
-%description debuginfo
-This package provides common directories for debug information.
-
-%description debuginfo -l pl.UTF-8
-Ten pakiet udostępnia wspólne katalogi dla plików z informacjami dla
-debuggera.
 
 %prep
 %setup -qcT
@@ -85,7 +71,6 @@ install -d \
 	$RPM_BUILD_ROOT/usr/lib64/initrd
 %endif
 
-%if %{with debuginfo}
 install -d \
 	$RPM_BUILD_ROOT/usr/lib/debug/%{_lib} \
 	$RPM_BUILD_ROOT/usr/lib/debug%{_libdir} \
@@ -102,7 +87,6 @@ install -d \
 find $RPM_BUILD_ROOT/usr/lib/debug -type d | while read line; do
 	echo ${line#$RPM_BUILD_ROOT}
 done > $RPM_BUILD_ROOT/usr/src/debug/%{name}-debuginfo.files
-%endif
 
 # create this for %clean
 tar -cf checkfiles.tar -C $RPM_BUILD_ROOT .
@@ -183,12 +167,9 @@ check_filesystem_dirs
 %dir /usr/lib64/pkgconfig
 %endif
 
-%if %{with debuginfo}
-%files debuginfo
-%defattr(644,root,root,755)
+# debuginfo
 %dir /usr/lib/debug
 /usr/lib/debug/*
 
 %dir /usr/src/debug
 /usr/src/debug/filesystem-debuginfo.files
-%endif
