@@ -8,7 +8,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	3.0
-Release:	26
+Release:	27
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -28,6 +28,7 @@ Provides:	browser-plugins(s390)
 Provides:	browser-plugins(sparc)
 %endif
 Obsoletes:	filesystem-debuginfo
+Provides:	filesystem-debuginfo = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # directory for "privilege separation" chroot
