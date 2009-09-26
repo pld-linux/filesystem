@@ -8,7 +8,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	3.0
-Release:	27
+Release:	28
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -57,7 +57,7 @@ install -d \
 	$RPM_BUILD_ROOT/lib/{firmware,security} \
 	$RPM_BUILD_ROOT/usr/include/security \
 	$RPM_BUILD_ROOT/usr/lib/{cgi-bin,browser-plugins,pkgconfig,initrd,ConsoleKit/run-session.d} \
-	$RPM_BUILD_ROOT/usr/share/{gnome/{help,wm-properties},man/man{n,l},man/pl/mann,pkgconfig,sounds,themes/Default,wallpapers,xsessions} \
+	$RPM_BUILD_ROOT/usr/share/{backgrounds,gnome/{help,wm-properties},man/man{n,l},man/pl/mann,pkgconfig,sounds,themes/Default,wallpapers,xsessions} \
 	$RPM_BUILD_ROOT/usr/src/examples \
 	$RPM_BUILD_ROOT/var/lock/subsys \
 	$RPM_BUILD_ROOT{%{_aclocaldir},%{_desktopdir}/docklets,%{_iconsdir},%{_pixmapsdir}} \
@@ -140,6 +140,7 @@ check_filesystem_dirs
 %dir /usr/lib/cgi-bin
 %dir /usr/lib/initrd
 %dir /usr/lib/pkgconfig
+%dir /usr/share/backgrounds
 %dir /usr/share/gnome
 %dir /usr/share/gnome/help
 %dir /usr/share/gnome/wm-properties
