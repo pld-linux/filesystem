@@ -8,7 +8,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	3.0
-Release:	29
+Release:	30
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -101,10 +101,6 @@ install -d \
 install -d \
 	$RPM_BUILD_ROOT/usr/lib/debug/lib64/security
 %endif
-
-find $RPM_BUILD_ROOT/usr/lib/debug -type d | while read line; do
-	echo ${line#$RPM_BUILD_ROOT}
-done > $RPM_BUILD_ROOT/usr/src/debug/%{name}-debuginfo.files
 
 # create this for %clean
 tar -cf checkfiles.tar -C $RPM_BUILD_ROOT .
@@ -204,4 +200,3 @@ check_filesystem_dirs
 /usr/lib/debug/*
 
 %dir /usr/src/debug
-/usr/src/debug/filesystem-debuginfo.files
