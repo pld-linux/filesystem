@@ -12,6 +12,7 @@ Release:	29
 License:	GPL
 Group:		Base
 BuildRequires:	automake
+BuildRequires:	rpm >= 4.4.9-56
 BuildRequires:	mktemp
 Requires:	FHS >= 2.3-15
 Provides:	browser-plugins(%{_target_base_arch})
@@ -35,6 +36,10 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_privsepdir	/usr/share/empty
 # directory for *.idl files (for CORBA implementations)
 %define		_idldir		/usr/share/idl
+
+%if "%{pld_release}" == "ac"
+%define		_xmandir	/usr/X11R6/man
+%endif
 
 %description
 This package contains common directories for packages that extend some
@@ -70,6 +75,18 @@ install -d \
 	$RPM_BUILD_ROOT/usr/lib64/pkgconfig \
 	$RPM_BUILD_ROOT/usr/lib64/browser-plugins \
 	$RPM_BUILD_ROOT/usr/lib64/initrd
+%endif
+
+%if "%{pld_release}" == "ac"
+# X11
+install -d $RPM_BUILD_ROOT/usr/X11R6/share
+for manp in man{1,2,3,4,5,6,7,8} ; do
+	install -d $RPM_BUILD_ROOT%{_xmandir}/$manp
+	for mloc in it ko pl; do
+		install -d $RPM_BUILD_ROOT%{_xmandir}/$mloc/$manp
+	done
+done
+install -d $RPM_BUILD_ROOT/usr/share/wm-properties
 %endif
 
 install -d \
@@ -168,6 +185,18 @@ check_filesystem_dirs
 %dir /usr/lib64/browser-plugins
 %dir /usr/lib64/initrd
 %dir /usr/lib64/pkgconfig
+%endif
+
+%if "%{pld_release}" == "ac"
+%dir /usr/X11R6
+%dir %{_xmandir}
+%{_xmandir}/man*
+%lang(it) %{_xmandir}/it
+%lang(ko) %{_xmandir}/ko
+%lang(pl) %{_xmandir}/pl
+%dir /usr/X11R6/share
+
+%dir /usr/share/wm-properties
 %endif
 
 # debuginfo
