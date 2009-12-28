@@ -159,7 +159,6 @@ check_filesystem_dirs
 %dir /usr/share/gnome/wm-properties
 %dir /usr/share/man/man[nl]
 %lang(pl) %dir /usr/share/man/pl/mann
-%dir /usr/share/mibs
 %dir /usr/share/pkgconfig
 %dir /usr/share/soundfonts
 %dir /usr/share/sounds
