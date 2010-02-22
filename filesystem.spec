@@ -130,8 +130,10 @@ check_filesystem_dirs
 %if "%{pld_release}" != "ac"
 %pretrans -p <lua>
 -- this needs to be a dir
--- feel free to write in pure lua, but success on first install is not important.
-os.execute("if [ -L /usr/include/X11 ]; then umask 022; mv -f /usr/include/X11{,.rpmsave}; mkdir -m755 -p /usr/include/X11 && mv -f /usr/include/X11.rpmsave/* /usr/include/X11; fi")
+if posix.stat("/usr/include/X11", "type") == "link" then
+	-- feel free to write in pure lua, but success on first install is not important.
+	os.execute("umask 022; mv -f /usr/include/X11{,.rpmsave}; mkdir -m755 -p /usr/include/X11 && mv -f /usr/include/X11.rpmsave/* /usr/include/X11")
+end
 %endif
 
 %files
