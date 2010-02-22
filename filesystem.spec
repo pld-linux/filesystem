@@ -32,6 +32,8 @@ Provides:	filesystem-debuginfo = %{version}-%{release}
 Obsoletes:	filesystem-debuginfo
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+# Adapter: This file does not like to be adapterized!
+
 # directory for "privilege separation" chroot
 %define		_privsepdir	/usr/share/empty
 # directory for *.idl files (for CORBA implementations)
@@ -124,6 +126,11 @@ check_filesystem_dirs() {
 }
 
 check_filesystem_dirs
+
+%pretrans -p <lua>
+-- this needs to be a dir
+-- feel free to write in pure lua, but success on first install is not important.
+os.execute("if [ -L /usr/include/X11 ]; then umask 022; mv -f /usr/include/X11{,.rpmsave}; mkdir -m755 -p /usr/include/X11 && mv -f /usr/include/X11.rpmsave/* /usr/include/X11; fi")
 
 %files
 %defattr(644,root,root,755)
