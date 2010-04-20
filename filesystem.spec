@@ -8,7 +8,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	3.0
-Release:	33
+Release:	34
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -67,6 +67,7 @@ install -d \
 	$RPM_BUILD_ROOT/usr/share/{backgrounds,gnome/{help,wm-properties},man/man{n,l},man/pl/mann,pkgconfig,sound{,font}s,themes/Default,wallpapers,xsessions} \
 	$RPM_BUILD_ROOT/usr/src/examples \
 	$RPM_BUILD_ROOT/var/lock/subsys \
+	$RPM_BUILD_ROOT/var/log/archive \
 	$RPM_BUILD_ROOT{%{_aclocaldir},%{_desktopdir}/docklets,%{_iconsdir},%{_pixmapsdir}} \
 	$RPM_BUILD_ROOT%{_fontsdir}/{{100,75}dpi,OTF,Speedo,Type1/{afm,pfm},TTF,cyrillic,local,misc} \
 	$RPM_BUILD_ROOT{%{_idldir},%{_privsepdir}}
@@ -180,6 +181,7 @@ end
 %dir /usr/share/xsessions
 %dir /usr/src/examples
 %attr(700,root,root) %dir /var/lock/subsys
+%attr(750,root,logs) %dir /var/log/archive
 %dir %{_aclocaldir}
 %dir %{_desktopdir}
 %dir %{_desktopdir}/docklets
