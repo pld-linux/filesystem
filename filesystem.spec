@@ -39,10 +39,6 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 # directory for *.idl files (for CORBA implementations)
 %define		_idldir		/usr/share/idl
 
-%if "%{pld_release}" == "ac"
-%define		_xmandir	/usr/X11R6/man
-%endif
-
 %description
 This package contains common directories for packages that extend some
 programs functionality, but don't require them themselves.
@@ -84,9 +80,9 @@ install -d \
 # X11
 install -d $RPM_BUILD_ROOT/usr/X11R6/share
 for manp in man{1,2,3,4,5,6,7,8} ; do
-	install -d $RPM_BUILD_ROOT%{_xmandir}/$manp
+	install -d $RPM_BUILD_ROOT/usr/X11R6/man/$manp
 	for mloc in it ko pl; do
-		install -d $RPM_BUILD_ROOT%{_xmandir}/$mloc/$manp
+		install -d $RPM_BUILD_ROOT/usr/X11R6/man/$mloc/$manp
 	done
 done
 install -d $RPM_BUILD_ROOT/usr/share/wm-properties
@@ -118,7 +114,7 @@ check_filesystem_dirs() {
 	RPMFILE2=%{?with_debuginfo:%{_rpmdir}/%{name}-debuginfo-%{version}-%{release}.%{_target_cpu}.rpm}
 	TMPFILE=$(mktemp)
 	# note: we must exclude from check all existing dirs belonging to FHS
-	find | sed -e 's|^\.||g' -e 's|^$||g' | LC_ALL=C sort | grep -v $TMPFILE | grep -E -v '^/(etc|etc/X11|home|lib|lib64|usr|usr/include|usr/lib|usr/lib64|usr/share|usr/share/man|usr/share/man/pl|usr/src|var|var/lock)$' > $TMPFILE
+	find | sed -e 's|^\.||g' -e 's|^$||g' | LC_ALL=C sort | grep -v $TMPFILE | grep -E -v '^/(etc|etc/X11|home|lib|lib64|usr|usr/include|usr/lib|usr/lib64|usr/share|usr/share/man|usr/share/man/pl|usr/src|var|var/lock|var/log)$' > $TMPFILE
 
 	# find finds also '.', so use option -B for diff
 	rpm -qpl $RPMFILE $RPMFILE2 | grep -v '^/$' | LC_ALL=C sort | diff -uB - $TMPFILE || :
@@ -199,11 +195,11 @@ end
 
 %if "%{pld_release}" == "ac"
 %dir /usr/X11R6
-%dir %{_xmandir}
-%{_xmandir}/man*
-%lang(it) %{_xmandir}/it
-%lang(ko) %{_xmandir}/ko
-%lang(pl) %{_xmandir}/pl
+%dir /usr/X11R6/man
+/usr/X11R6/man/man*
+%lang(it) /usr/X11R6/man/it
+%lang(ko) /usr/X11R6/man/ko
+%lang(pl) /usr/X11R6/man/pl
 %dir /usr/X11R6/share
 
 %dir /usr/share/wm-properties
