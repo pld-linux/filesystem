@@ -78,6 +78,7 @@ install -d \
 %endif
 
 %if "%{pld_release}" == "ac"
+rmdir $RPM_BUILD_ROOT/usr/include/X11
 # X11
 install -d $RPM_BUILD_ROOT/usr/X11R6/share
 for manp in man{1,2,3,4,5,6,7,8} ; do
@@ -146,7 +147,9 @@ check_filesystem_dirs
 %dir /lib/security
 %dir /selinux
 %dir /sys
+%if "%{pld_release}" != "ac"
 %dir /usr/include/X11
+%endif
 %dir /usr/include/security
 %dir /usr/lib/ConsoleKit
 %dir /usr/lib/ConsoleKit/run-session.d
