@@ -8,7 +8,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	3.0
-Release:	33
+Release:	33.1
 License:	GPL
 Group:		Base
 BuildRequires:	automake
