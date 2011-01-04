@@ -8,7 +8,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	3.0
-Release:	37
+Release:	38
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -59,7 +59,7 @@ install -d \
 	$RPM_BUILD_ROOT/home/{users,services} \
 	$RPM_BUILD_ROOT/lib/{firmware,security} \
 	$RPM_BUILD_ROOT/usr/include/{security,X11} \
-	$RPM_BUILD_ROOT/usr/lib/{cgi-bin,browser-plugins,pkgconfig,initrd,ConsoleKit/run-session.d} \
+	$RPM_BUILD_ROOT/usr/lib/{cgi-bin,browser-plugins,mozilla/extensions,pkgconfig,initrd,ConsoleKit/run-session.d} \
 	$RPM_BUILD_ROOT/usr/share/{backgrounds,gnome/{help,wm-properties},man/man{n,l},man/pl/mann,pkgconfig,sound{,font}s,themes/Default,vala/vapi,wallpapers,xsessions} \
 	$RPM_BUILD_ROOT/usr/src/examples \
 	$RPM_BUILD_ROOT/var/lock/subsys \
@@ -73,6 +73,7 @@ install -d \
 	$RPM_BUILD_ROOT/lib64/security \
 	$RPM_BUILD_ROOT/usr/lib64/pkgconfig \
 	$RPM_BUILD_ROOT/usr/lib64/browser-plugins \
+	$RPM_BUILD_ROOT/usr/lib64/mozilla/extensions \
 	$RPM_BUILD_ROOT/usr/lib64/initrd
 %endif
 
@@ -165,6 +166,8 @@ end
 %dir /usr/lib/ConsoleKit
 %dir /usr/lib/ConsoleKit/run-session.d
 %dir /usr/lib/browser-plugins
+%dir /usr/lib/mozilla
+%dir /usr/lib/mozilla/extensions
 %dir /usr/lib/cgi-bin
 %dir /usr/lib/initrd
 %dir /usr/lib/pkgconfig
@@ -197,6 +200,8 @@ end
 %if "%{_lib}" == "lib64"
 %dir /lib64/security
 %dir /usr/lib64/browser-plugins
+%dir /usr/lib64/mozilla
+%dir /usr/lib64/mozilla/extensions
 %dir /usr/lib64/initrd
 %dir /usr/lib64/pkgconfig
 %endif
