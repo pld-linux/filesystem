@@ -8,7 +8,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	3.0
-Release:	39
+Release:	40
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -29,7 +29,7 @@ Provides:	browser-plugins(s390)
 Provides:	browser-plugins(sparc)
 %endif
 Provides:	filesystem-debuginfo = %{version}-%{release}
-Obsoletes:	filesystem-debuginfo
+Obsoletes:	filesystem-debuginfo < 3.0-36
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # Adapter: This file does not like to be adapterized!
