@@ -8,7 +8,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	3.0
-Release:	40
+Release:	41
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -57,7 +57,7 @@ install -d \
 	$RPM_BUILD_ROOT/{initrd,selinux,sys} \
 	$RPM_BUILD_ROOT/etc/{pki,X11/xinit/xinitrc.d,certs,default,logrotate.d,security,sysconfig/wmstyle,tmpwatch,xdg/autostart,init,NetworkManager/dispatcher.d} \
 	$RPM_BUILD_ROOT/home/{users,services} \
-	$RPM_BUILD_ROOT/lib/{firmware,security} \
+	$RPM_BUILD_ROOT/lib/{firmware,security,udev/rules.d} \
 	$RPM_BUILD_ROOT/usr/include/{security,X11} \
 	$RPM_BUILD_ROOT/usr/lib/{cgi-bin,browser-plugins,mozilla/extensions,pkgconfig,initrd,ConsoleKit/run-session.d} \
 	$RPM_BUILD_ROOT/usr/share/{backgrounds,color/icc,gnome/{help,wm-properties},man/man{n,l},man/pl/mann,pkgconfig,sound{,font}s,themes/Default,vala/vapi,wallpapers,xsessions} \
@@ -157,6 +157,8 @@ end
 %dir /initrd
 %dir /lib/firmware
 %dir /lib/security
+%dir /lib/udev
+%dir /lib/udev/rules.d
 %dir /selinux
 %dir /sys
 %if "%{pld_release}" != "ac"
