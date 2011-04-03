@@ -8,7 +8,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	3.0
-Release:	42
+Release:	43
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -54,7 +54,7 @@ funkcjonalność programów, ale nie wymagających ich.
 rm -rf $RPM_BUILD_ROOT
 
 install -d \
-	$RPM_BUILD_ROOT/{initrd,selinux,sys} \
+	$RPM_BUILD_ROOT/{initrd,selinux,run,sys} \
 	$RPM_BUILD_ROOT/etc/{pki,X11/xinit/xinitrc.d,certs,default,logrotate.d,security,sysconfig/wmstyle,tmpwatch,xdg/autostart,init,NetworkManager/dispatcher.d} \
 	$RPM_BUILD_ROOT/home/{users,services} \
 	$RPM_BUILD_ROOT/lib/{firmware,security,udev/rules.d} \
@@ -159,6 +159,7 @@ end
 %dir /lib/security
 %dir /lib/udev
 %dir /lib/udev/rules.d
+%dir /run
 %dir /selinux
 %dir /sys
 %if "%{pld_release}" != "ac"
