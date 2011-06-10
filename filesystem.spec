@@ -8,7 +8,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	3.0
-Release:	45
+Release:	46
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -60,7 +60,7 @@ install -d \
 	$RPM_BUILD_ROOT/lib/{firmware,security,udev/rules.d} \
 	$RPM_BUILD_ROOT/usr/include/{security,X11} \
 	$RPM_BUILD_ROOT/usr/lib/{cgi-bin,browser-plugins,mozilla/extensions,pkgconfig,initrd,ConsoleKit/run-session.d} \
-	$RPM_BUILD_ROOT/usr/share/{augeas/lenses/tests,backgrounds,color/icc,gnome/{help,wm-properties},man/man{n,l},man/pl/mann,pkgconfig,sound{,font}s,themes/Default,vala/vapi,wallpapers,xsessions} \
+	$RPM_BUILD_ROOT/usr/share/{augeas/lenses/tests,backgrounds,cmake/Modules,color/icc,gnome/{help,wm-properties},man/man{n,l},man/pl/mann,pkgconfig,sound{,font}s,themes/Default,vala/vapi,wallpapers,xsessions} \
 	$RPM_BUILD_ROOT/usr/src/examples \
 	$RPM_BUILD_ROOT/var/lib/color/icc \
 	$RPM_BUILD_ROOT/var/lock/subsys \
@@ -179,6 +179,8 @@ end
 %dir /usr/share/augeas/lenses
 %dir /usr/share/augeas/lenses/tests
 %dir /usr/share/backgrounds
+%dir /usr/share/cmake
+%dir /usr/share/cmake/Modules
 %dir /usr/share/color
 %dir /usr/share/color/icc
 %dir /usr/share/gnome
