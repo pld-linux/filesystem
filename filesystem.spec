@@ -8,7 +8,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	3.0
-Release:	47
+Release:	48
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -60,7 +60,7 @@ install -d \
 	$RPM_BUILD_ROOT/lib/{firmware,security,udev/rules.d} \
 	$RPM_BUILD_ROOT/usr/include/{security,X11} \
 	$RPM_BUILD_ROOT/usr/lib/{cgi-bin,browser-plugins,mozilla/extensions,pkgconfig,initrd,ConsoleKit/run-session.d} \
-	$RPM_BUILD_ROOT/usr/share/{augeas/lenses/tests,backgrounds,cmake/Modules,color/icc,gnome/{help,wm-properties},man/man{n,l},man/pl/mann,pkgconfig,sound{,font}s,themes/Default,vala/vapi,wallpapers,xsessions} \
+	$RPM_BUILD_ROOT/usr/share/{augeas/lenses/tests,backgrounds,cmake/Modules,color/icc,gnome/help,man/man{n,l},man/pl/mann,pkgconfig,sound{,font}s,themes/Default,vala/vapi,wallpapers,xsessions} \
 	$RPM_BUILD_ROOT/usr/src/examples \
 	$RPM_BUILD_ROOT/var/lib/color/icc \
 	$RPM_BUILD_ROOT/var/lock/subsys \
@@ -185,7 +185,6 @@ end
 %dir /usr/share/color/icc
 %dir /usr/share/gnome
 %dir /usr/share/gnome/help
-%dir /usr/share/gnome/wm-properties
 %dir /usr/share/man/man[nl]
 %lang(pl) %dir /usr/share/man/pl/mann
 %dir /usr/share/pkgconfig
