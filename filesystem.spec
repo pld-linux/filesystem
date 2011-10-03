@@ -8,7 +8,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	3.0
-Release:	50
+Release:	51
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -68,6 +68,15 @@ install -d \
 	$RPM_BUILD_ROOT{%{_aclocaldir},%{_desktopdir}/docklets,%{_iconsdir},%{_pixmapsdir}} \
 	$RPM_BUILD_ROOT%{_fontsdir}/{{100,75}dpi,OTF,Speedo,Type1/{afm,pfm},TTF,cyrillic,local,misc} \
 	$RPM_BUILD_ROOT{%{_idldir},%{_privsepdir}}
+
+
+> %{name}.lang
+install -d $RPM_BUILD_ROOT/usr/share/help/C
+
+for lang in ar ca cs da de el en_GB es eu fi fr gl he hi hr hu id it ja lt nb nl oc pl ps pt_BR ru sl sr sr@latin sv th tr vi zh_CN zh_TW; do
+	install -d $RPM_BUILD_ROOT/usr/share/help/${lang}
+	echo "%%lang($lang) %dir /usr/share/help/${lang}" >> %{name}.lang
+done
 
 %if "%{_lib}" == "lib64"
 install -d \
@@ -136,7 +145,7 @@ if posix.stat("/usr/include/X11", "type") == "link" then
 end
 %endif
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %dir /etc/X11/xinit
 %dir /etc/X11/xinit/xinitrc.d
@@ -184,6 +193,8 @@ end
 %dir /usr/share/color/icc
 %dir /usr/share/gnome
 %dir /usr/share/gnome/help
+%dir /usr/share/help
+%dir /usr/share/help/C
 %dir /usr/share/man/man[nl]
 %lang(pl) %dir /usr/share/man/pl/mann
 %dir /usr/share/pkgconfig
