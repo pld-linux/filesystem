@@ -8,7 +8,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	3.0
-Release:	51
+Release:	52
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -55,12 +55,12 @@ rm -rf $RPM_BUILD_ROOT
 
 install -d \
 	$RPM_BUILD_ROOT/{initrd,selinux,run,sys} \
-	$RPM_BUILD_ROOT/etc/{pki,X11/xinit/xinitrc.d,certs,default,logrotate.d,security,sysconfig,tmpwatch,xdg/autostart,init,NetworkManager/dispatcher.d} \
+	$RPM_BUILD_ROOT/etc/{NetworkManager/dispatcher.d,X11/xinit/xinitrc.d,certs,default,init,logrotate.d,pki,security,sysconfig,tmpwatch,xdg/autostart} \
 	$RPM_BUILD_ROOT/home/{users,services} \
 	$RPM_BUILD_ROOT/lib/{firmware,security,udev/rules.d} \
 	$RPM_BUILD_ROOT/usr/include/{security,X11} \
-	$RPM_BUILD_ROOT/usr/lib/{cgi-bin,browser-plugins,mozilla/extensions,pkgconfig,initrd,ConsoleKit/run-session.d} \
-	$RPM_BUILD_ROOT/usr/share/{augeas/lenses/tests,backgrounds,cmake/Modules,color/icc,gnome/help,man/man{n,l},man/pl/mann,pkgconfig,sound{,font}s,themes/Default,vala/vapi,wallpapers,xsessions} \
+	$RPM_BUILD_ROOT/usr/lib/{ConsoleKit/run-session.d,browser-plugins,cgi-bin,cmake,mozilla/extensions,pkgconfig,initrd} \
+	$RPM_BUILD_ROOT/usr/share/{augeas/lenses/tests,backgrounds,cmake/Modules,color/icc,gnome/help,man/man{n,l},man/pl/mann,pkgconfig,soundfonts,sounds,themes/Default,vala/vapi,wallpapers,xsessions} \
 	$RPM_BUILD_ROOT/usr/src/examples \
 	$RPM_BUILD_ROOT/var/lib/color/icc \
 	$RPM_BUILD_ROOT/var/lock/subsys \
@@ -68,7 +68,6 @@ install -d \
 	$RPM_BUILD_ROOT{%{_aclocaldir},%{_desktopdir}/docklets,%{_iconsdir},%{_pixmapsdir}} \
 	$RPM_BUILD_ROOT%{_fontsdir}/{{100,75}dpi,OTF,Speedo,Type1/{afm,pfm},TTF,cyrillic,local,misc} \
 	$RPM_BUILD_ROOT{%{_idldir},%{_privsepdir}}
-
 
 > %{name}.lang
 install -d $RPM_BUILD_ROOT/usr/share/help/C
@@ -81,10 +80,7 @@ done
 %if "%{_lib}" == "lib64"
 install -d \
 	$RPM_BUILD_ROOT/lib64/security \
-	$RPM_BUILD_ROOT/usr/lib64/pkgconfig \
-	$RPM_BUILD_ROOT/usr/lib64/browser-plugins \
-	$RPM_BUILD_ROOT/usr/lib64/mozilla/extensions \
-	$RPM_BUILD_ROOT/usr/lib64/initrd
+	$RPM_BUILD_ROOT/usr/lib64/{browser-plugins,cmake,initrd,mozilla/extensions,pkgconfig}
 %endif
 
 %if "%{pld_release}" == "ac"
@@ -153,10 +149,10 @@ end
 %dir /etc/default
 %dir /etc/init
 %dir /etc/logrotate.d
+%dir /etc/pki
 %attr(751,root,root) %dir /etc/security
 %dir /etc/sysconfig
 %dir /etc/tmpwatch
-%dir /etc/pki
 %dir /etc/xdg
 %dir /etc/xdg/autostart
 %dir /etc/NetworkManager
@@ -178,10 +174,11 @@ end
 %dir /usr/lib/ConsoleKit
 %dir /usr/lib/ConsoleKit/run-session.d
 %dir /usr/lib/browser-plugins
+%dir /usr/lib/cgi-bin
+%dir /usr/lib/cmake
+%dir /usr/lib/initrd
 %dir /usr/lib/mozilla
 %dir /usr/lib/mozilla/extensions
-%dir /usr/lib/cgi-bin
-%dir /usr/lib/initrd
 %dir /usr/lib/pkgconfig
 %dir /usr/share/augeas
 %dir /usr/share/augeas/lenses
@@ -222,9 +219,10 @@ end
 %if "%{_lib}" == "lib64"
 %dir /lib64/security
 %dir /usr/lib64/browser-plugins
+%dir /usr/lib64/cmake
+%dir /usr/lib64/initrd
 %dir /usr/lib64/mozilla
 %dir /usr/lib64/mozilla/extensions
-%dir /usr/lib64/initrd
 %dir /usr/lib64/pkgconfig
 %endif
 
