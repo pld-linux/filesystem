@@ -7,8 +7,8 @@
 Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
-Version:	3.0
-Release:	52
+Version:	4.0
+Release:	1
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -57,9 +57,9 @@ install -d \
 	$RPM_BUILD_ROOT/{initrd,selinux,run,sys} \
 	$RPM_BUILD_ROOT/etc/{NetworkManager/dispatcher.d,X11/xinit/xinitrc.d,certs,default,init,logrotate.d,pki,security,sysconfig,tmpwatch,xdg/autostart} \
 	$RPM_BUILD_ROOT/home/{users,services} \
-	$RPM_BUILD_ROOT/lib/{firmware,security,udev/rules.d} \
+	$RPM_BUILD_ROOT/lib/{firmware,security,udev/rules.d,systemd/system} \
 	$RPM_BUILD_ROOT/usr/include/{security,X11} \
-	$RPM_BUILD_ROOT/usr/lib/{ConsoleKit/run-session.d,browser-plugins,cgi-bin,cmake,mozilla/extensions,pkgconfig,initrd} \
+	$RPM_BUILD_ROOT/usr/lib/{ConsoleKit/run-session.d,browser-plugins,cgi-bin,cmake,mozilla/extensions,pkgconfig,initrd,tmpfiles.d} \
 	$RPM_BUILD_ROOT/usr/share/{augeas/lenses/tests,backgrounds,cmake/Modules,color/icc,gnome/help,man/man{n,l},man/pl/mann,pkgconfig,soundfonts,sounds,themes/Default,vala/vapi,wallpapers,xsessions} \
 	$RPM_BUILD_ROOT/usr/src/examples \
 	$RPM_BUILD_ROOT/var/lib/color/icc \
@@ -162,6 +162,8 @@ end
 %dir /initrd
 %dir /lib/firmware
 %dir /lib/security
+%dir /lib/systemd
+%dir /lib/systemd/system
 %dir /lib/udev
 %dir /lib/udev/rules.d
 %dir /run
@@ -180,6 +182,7 @@ end
 %dir /usr/lib/mozilla
 %dir /usr/lib/mozilla/extensions
 %dir /usr/lib/pkgconfig
+%dir /usr/lib/tmpfiles.d
 %dir /usr/share/augeas
 %dir /usr/share/augeas/lenses
 %dir /usr/share/augeas/lenses/tests
