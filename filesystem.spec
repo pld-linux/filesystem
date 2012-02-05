@@ -8,7 +8,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	4.0
-Release:	3
+Release:	4
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -210,7 +210,7 @@ end
 %dir /var/lib/color
 %dir /var/lib/color/icc
 %attr(700,root,root) %dir /var/lock/subsys
-%attr(750,root,logs) %dir /var/log/archive
+%attr(751,root,logs) %dir /var/log/archive
 %dir %{_aclocaldir}
 %dir %{_desktopdir}
 %dir %{_desktopdir}/docklets
