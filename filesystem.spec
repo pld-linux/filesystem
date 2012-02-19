@@ -8,7 +8,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	4.0
-Release:	4
+Release:	5
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -55,7 +55,7 @@ rm -rf $RPM_BUILD_ROOT
 
 install -d \
 	$RPM_BUILD_ROOT/{initrd,selinux,run,sys} \
-	$RPM_BUILD_ROOT/etc/{NetworkManager/dispatcher.d,X11/xinit/xinitrc.d,certs,default,init,logrotate.d,pki,security,sysconfig,tmpwatch,xdg/autostart} \
+	$RPM_BUILD_ROOT/etc/{NetworkManager/dispatcher.d,X11/xinit/xinitrc.d,certs,default,init,logrotate.d,pki/CA,security,sysconfig,tmpwatch,xdg/autostart} \
 	$RPM_BUILD_ROOT/home/{users,services} \
 	$RPM_BUILD_ROOT/lib/{firmware,security,udev/rules.d,systemd/system} \
 	$RPM_BUILD_ROOT/usr/include/{security,X11} \
@@ -150,6 +150,7 @@ end
 %dir /etc/init
 %dir /etc/logrotate.d
 %dir /etc/pki
+%dir /etc/pki/CA
 %attr(751,root,root) %dir /etc/security
 %dir /etc/sysconfig
 %dir /etc/tmpwatch
