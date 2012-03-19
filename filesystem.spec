@@ -8,7 +8,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	4.0
-Release:	6
+Release:	7
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -167,7 +167,7 @@ end
 %dir /lib/systemd/system
 %dir /lib/udev
 %dir /lib/udev/rules.d
-%dir %attr(1777,root,root) /run
+%dir /run
 %dir /selinux
 %dir /sys
 %if "%{pld_release}" != "ac"
