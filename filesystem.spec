@@ -8,7 +8,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	4.0
-Release:	7
+Release:	8
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -60,7 +60,7 @@ install -d \
 	$RPM_BUILD_ROOT/lib/{firmware,security,udev/rules.d,systemd/system} \
 	$RPM_BUILD_ROOT/usr/include/{security,X11} \
 	$RPM_BUILD_ROOT/usr/lib/{ConsoleKit/run-session.d,browser-plugins,cgi-bin,cmake,mozilla/extensions,pkgconfig,initrd,tmpfiles.d} \
-	$RPM_BUILD_ROOT/usr/share/{augeas/lenses/tests,backgrounds,cmake/Modules,color/icc,gnome/help,man/man{n,l},man/pl/mann,pkgconfig,soundfonts,sounds,themes/Default,vala/vapi,wallpapers,xsessions} \
+	$RPM_BUILD_ROOT/usr/share/{augeas/lenses/tests,backgrounds,cmake/Modules,color/icc,gnome/help,man/man{n,l},man/pl/mann,pkgconfig,soundfonts,sounds,themes/Default,thumbnailers,vala/vapi,wallpapers,xsessions} \
 	$RPM_BUILD_ROOT/usr/src/examples \
 	$RPM_BUILD_ROOT/var/lib/color/icc \
 	$RPM_BUILD_ROOT/var/lock/subsys \
@@ -203,6 +203,7 @@ end
 %dir /usr/share/sounds
 %dir /usr/share/themes
 %dir /usr/share/themes/Default
+%dir /usr/share/thumbnailers
 %dir /usr/share/vala
 %dir /usr/share/vala/vapi
 %dir /usr/share/wallpapers
