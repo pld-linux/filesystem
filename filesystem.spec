@@ -8,7 +8,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	4.0
-Release:	8
+Release:	9
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -72,7 +72,7 @@ install -d \
 > %{name}.lang
 install -d $RPM_BUILD_ROOT/usr/share/help/C
 
-for lang in ar ca cs da de el en_GB es eu fi fr gl he hi hr hu id it ja lt nb nl oc pl ps pt_BR ru sl sr sr@latin sv th tr vi zh_CN zh_TW; do
+for lang in ar bg ca cs da de el en_GB es eu fi fr gl he hi hr hu id it ja ko lt lv nb nl oc pl ps pt_BR ru sl sr sr@latin sv te th tr uk vi zh_CN zh_HK zh_TW; do
 	install -d $RPM_BUILD_ROOT/usr/share/help/${lang}
 	echo "%%lang($lang) %dir /usr/share/help/${lang}" >> %{name}.lang
 done
