@@ -8,7 +8,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	4.0
-Release:	11
+Release:	12
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -65,7 +65,7 @@ install -d \
 	$RPM_BUILD_ROOT/var/lib/color/icc \
 	$RPM_BUILD_ROOT/var/lock/subsys \
 	$RPM_BUILD_ROOT/var/log/archive \
-	$RPM_BUILD_ROOT{%{_aclocaldir},%{_desktopdir}/docklets,%{_iconsdir},%{_pixmapsdir}} \
+	$RPM_BUILD_ROOT{%{_aclocaldir},%{_desktopdir}/{docklets,screensavers},%{_iconsdir},%{_pixmapsdir}} \
 	$RPM_BUILD_ROOT%{_fontsdir}/{{100,75}dpi,OTF,Speedo,Type1/{afm,pfm},TTF,cyrillic,local,misc} \
 	$RPM_BUILD_ROOT{%{_idldir},%{_privsepdir}}
 
@@ -216,6 +216,7 @@ end
 %dir %{_aclocaldir}
 %dir %{_desktopdir}
 %dir %{_desktopdir}/docklets
+%dir %{_desktopdir}/screensavers
 %dir %{_iconsdir}
 %dir %{_pixmapsdir}
 %{_fontsdir}
