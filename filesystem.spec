@@ -8,7 +8,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	4.0
-Release:	14
+Release:	15
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -72,7 +72,7 @@ install -d \
 > %{name}.lang
 install -d $RPM_BUILD_ROOT/usr/share/help/C
 
-for lang in ar bg ca cs da de el en_GB es eu fi fr gl he hi hr hu id it ja ko lt lv nb nds nl oc pa pl ps pt pt_BR ro ru sl sr sr@latin sv te th tr uk vi zh_CN zh_HK zh_TW; do
+for lang in ar bg ca cs da de el en_GB es eu fi fr gl he hi hr hu id it ja ko lt lv mk nb nds nl oc pa pl ps pt pt_BR ro ru sl sr sr@latin sv te th tr uk vi zh_CN zh_HK zh_TW; do
 	install -d $RPM_BUILD_ROOT/usr/share/help/${lang}
 	echo "%%lang($lang) %dir /usr/share/help/${lang}" >> %{name}.lang
 done
@@ -135,9 +135,18 @@ check_filesystem_dirs
 %if "%{pld_release}" != "ac"
 %pretrans -p <lua>
 -- this needs to be a dir
-if posix.stat("/usr/include/X11", "type") == "link" then
-	-- feel free to write in pure lua, but success on first install is not important.
-	os.execute("umask 022; mv -f /usr/include/X11{,.rpmsave}; mkdir -m755 -p /usr/include/X11 && mv -f /usr/include/X11.rpmsave/* /usr/include/X11")
+if posix.stat("/tmp/include/X11", "type") == "link" then
+        posix.umask("0755");
+        os.rename("/tmp/include/X11", "/tmp/include/X11.rpmsave")
+        posix.mkdir("/tmp")
+        posix.mkdir("/tmp/include")
+        posix.mkdir("/tmp/include/X11")
+        oldpwd = posix.getcwd()
+        posix.chdir("/tmp/include/X11.rpmsave")
+        for i,j in pairs(posix.glob("*")) do
+                os.rename(j, "/tmp/include/X11/" .. j)
+        end
+        posix.chdir(oldpwd)
 end
 %endif
 
