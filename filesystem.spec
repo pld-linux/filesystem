@@ -8,7 +8,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	4.0
-Release:	15
+Release:	16
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -135,16 +135,16 @@ check_filesystem_dirs
 %if "%{pld_release}" != "ac"
 %pretrans -p <lua>
 -- this needs to be a dir
-if posix.stat("/tmp/include/X11", "type") == "link" then
+if posix.stat("/usr/include/X11", "type") == "link" then
         posix.umask("0755");
-        os.rename("/tmp/include/X11", "/tmp/include/X11.rpmsave")
-        posix.mkdir("/tmp")
-        posix.mkdir("/tmp/include")
-        posix.mkdir("/tmp/include/X11")
+        os.rename("/usr/include/X11", "/usr/include/X11.rpmsave")
+        posix.mkdir("/usr")
+        posix.mkdir("/usr/include")
+        posix.mkdir("/usr/include/X11")
         oldpwd = posix.getcwd()
-        posix.chdir("/tmp/include/X11.rpmsave")
+        posix.chdir("/usr/include/X11.rpmsave")
         for i,j in pairs(posix.glob("*")) do
-                os.rename(j, "/tmp/include/X11/" .. j)
+                os.rename(j, "/usr/include/X11/" .. j)
         end
         posix.chdir(oldpwd)
 end
