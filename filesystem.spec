@@ -136,17 +136,17 @@ check_filesystem_dirs
 %pretrans -p <lua>
 -- this needs to be a dir
 if posix.stat("/usr/include/X11", "type") == "link" then
-        posix.umask("0755");
-        os.rename("/usr/include/X11", "/usr/include/X11.rpmsave")
-        posix.mkdir("/usr")
-        posix.mkdir("/usr/include")
-        posix.mkdir("/usr/include/X11")
-        oldpwd = posix.getcwd()
-        posix.chdir("/usr/include/X11.rpmsave")
-        for i,j in pairs(posix.glob("*")) do
-                os.rename(j, "/usr/include/X11/" .. j)
-        end
-        posix.chdir(oldpwd)
+	posix.umask("0755");
+	os.rename("/usr/include/X11", "/usr/include/X11.rpmsave")
+	posix.mkdir("/usr")
+	posix.mkdir("/usr/include")
+	posix.mkdir("/usr/include/X11")
+	oldpwd = posix.getcwd()
+	posix.chdir("/usr/include/X11.rpmsave")
+	for i,j in pairs(posix.glob("*")) do
+		os.rename(j, "/usr/include/X11/" .. j)
+	end
+	posix.chdir(oldpwd)
 end
 %endif
 
