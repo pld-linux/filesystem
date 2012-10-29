@@ -8,7 +8,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	4.0
-Release:	17
+Release:	18
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -67,7 +67,8 @@ install -d \
 	$RPM_BUILD_ROOT/var/log/archive \
 	$RPM_BUILD_ROOT{%{_aclocaldir},%{_desktopdir}/{docklets,screensavers},%{_iconsdir},%{_pixmapsdir}} \
 	$RPM_BUILD_ROOT%{_fontsdir}/{{100,75}dpi,OTF,Speedo,Type1/{afm,pfm},TTF,cyrillic,local,misc} \
-	$RPM_BUILD_ROOT{%{_idldir},%{_privsepdir}}
+	$RPM_BUILD_ROOT{%{_idldir},%{_privsepdir}} \
+	$RPM_BUILD_ROOT/boot/efi
 
 > %{name}.lang
 install -d $RPM_BUILD_ROOT/usr/share/help/C
@@ -152,6 +153,7 @@ end
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
+%dir /boot/efi
 %dir /etc/X11/xinit
 %dir /etc/X11/xinit/xinitrc.d
 %attr(751,root,root) %dir /etc/certs
