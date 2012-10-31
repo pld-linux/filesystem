@@ -1,3 +1,6 @@
+# NOTE
+# - do not use any other user/group than "root", as then we have to depend on "setup" package.
+#   see the gid_xxx macros and post scriptlet
 
 # disable rpm generated debug package, we handle it differently here
 %define		_enable_debug_packages	0
@@ -8,7 +11,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	4.0
-Release:	18
+Release:	19
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -38,6 +41,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_privsepdir	/usr/share/empty
 # directory for *.idl files (for CORBA implementations)
 %define		_idldir		/usr/share/idl
+
+# we have to use numeric uids/groups. see comment beginning of the spec
+%define		gid_logs	124
 
 %description
 This package contains common directories for packages that extend some
@@ -151,6 +157,9 @@ if posix.stat("/usr/include/X11", "type") == "link" then
 end
 %endif
 
+%post -p <lua>
+posix.chown("/var/log/archive", 0, %{gid_logs})
+
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %dir /boot/efi
@@ -223,7 +232,7 @@ end
 %dir /var/lib/color
 %dir /var/lib/color/icc
 %attr(700,root,root) %dir /var/lock/subsys
-%attr(751,root,logs) %dir /var/log/archive
+%attr(751,root,root) %dir /var/log/archive
 %dir %{_aclocaldir}
 %dir %{_desktopdir}
 %dir %{_desktopdir}/docklets
