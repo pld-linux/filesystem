@@ -11,7 +11,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	4.0
-Release:	24
+Release:	25
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -66,7 +66,7 @@ install -d \
 	$RPM_BUILD_ROOT/lib/{firmware,security,udev/rules.d,systemd/system} \
 	$RPM_BUILD_ROOT/usr/include/{security,X11} \
 	$RPM_BUILD_ROOT/usr/lib/{ConsoleKit/run-session.d,browser-plugins,cgi-bin,cmake,mozilla/extensions,pkgconfig,initrd,tmpfiles.d} \
-	$RPM_BUILD_ROOT/usr/share/{augeas/lenses/tests,backgrounds,cmake/Modules,color/icc,gnome/help,mate/help,man/man{n,l},man/pl/mann,pkgconfig,soundfonts,sounds,themes/Default,thumbnailers,vala/vapi,wallpapers,xsessions} \
+	$RPM_BUILD_ROOT/usr/share/{appdata,augeas/lenses/tests,backgrounds,cmake/Modules,color/icc,gnome/help,mate/help,man/man{n,l},man/pl/mann,pkgconfig,soundfonts,sounds,themes/Default,thumbnailers,vala/vapi,wallpapers,wayland-sessions,xsessions} \
 	$RPM_BUILD_ROOT/usr/src/examples \
 	$RPM_BUILD_ROOT/var/lib/color/icc \
 	$RPM_BUILD_ROOT/var/lock/subsys \
@@ -207,6 +207,7 @@ posix.chown("/var/log/archive", 0, %{gid_logs})
 %dir /usr/lib/mozilla/extensions
 %dir /usr/lib/pkgconfig
 %dir /usr/lib/tmpfiles.d
+%dir /usr/share/appdata
 %dir /usr/share/augeas
 %dir /usr/share/augeas/lenses
 %dir /usr/share/augeas/lenses/tests
@@ -232,6 +233,7 @@ posix.chown("/var/log/archive", 0, %{gid_logs})
 %dir /usr/share/vala
 %dir /usr/share/vala/vapi
 %dir /usr/share/wallpapers
+%dir /usr/share/wayland-sessions
 %dir /usr/share/xsessions
 %dir /usr/src/examples
 %dir /var/lib/color
