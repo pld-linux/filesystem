@@ -11,7 +11,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	4.0
-Release:	27
+Release:	28
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -65,7 +65,7 @@ install -d \
 	$RPM_BUILD_ROOT/home/{users,services} \
 	$RPM_BUILD_ROOT/lib/{firmware,security,udev/rules.d,systemd/system} \
 	$RPM_BUILD_ROOT/usr/include/{security,X11} \
-	$RPM_BUILD_ROOT/usr/lib/{ConsoleKit/run-session.d,browser-plugins,cgi-bin,cmake,mozilla/extensions,pkgconfig,initrd,tmpfiles.d} \
+	$RPM_BUILD_ROOT/usr/lib/{ConsoleKit/run-session.d,browser-plugins,cgi-bin,cmake,mozilla/extensions,pkcs11,pkgconfig,initrd,tmpfiles.d} \
 	$RPM_BUILD_ROOT/usr/share/{appdata,augeas/lenses/tests,backgrounds,cmake/Modules,color/icc,gnome/help,mate/help,man/man{n,l},man/pl/mann,ppd,pkgconfig,soundfonts,sounds,themes/Default,thumbnailers,vala/vapi,wallpapers,wayland-sessions,xsessions} \
 	$RPM_BUILD_ROOT/usr/src/examples \
 	$RPM_BUILD_ROOT/var/lib/color/icc \
@@ -87,7 +87,7 @@ done
 %if "%{_lib}" == "lib64"
 install -d \
 	$RPM_BUILD_ROOT/lib64/security \
-	$RPM_BUILD_ROOT/usr/lib64/{browser-plugins,cmake,initrd,mozilla/extensions,pkgconfig}
+	$RPM_BUILD_ROOT/usr/lib64/{browser-plugins,cmake,initrd,mozilla/extensions,pkcs11,pkgconfig}
 %endif
 
 %if "%{pld_release}" == "ac"
@@ -205,6 +205,7 @@ posix.chown("/var/log/archive", 0, %{gid_logs})
 %dir /usr/lib/initrd
 %dir /usr/lib/mozilla
 %dir /usr/lib/mozilla/extensions
+%dir /usr/lib/pkcs11
 %dir /usr/lib/pkgconfig
 %dir /usr/lib/tmpfiles.d
 %dir /usr/share/appdata
@@ -257,6 +258,7 @@ posix.chown("/var/log/archive", 0, %{gid_logs})
 %dir /usr/lib64/initrd
 %dir /usr/lib64/mozilla
 %dir /usr/lib64/mozilla/extensions
+%dir /usr/lib64/pkcs11
 %dir /usr/lib64/pkgconfig
 %endif
 
