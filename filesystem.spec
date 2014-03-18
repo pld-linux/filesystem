@@ -11,7 +11,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	4.0
-Release:	28
+Release:	29
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -74,7 +74,8 @@ install -d \
 	$RPM_BUILD_ROOT{%{_aclocaldir},%{_desktopdir}/{docklets,screensavers},%{_iconsdir},%{_pixmapsdir}} \
 	$RPM_BUILD_ROOT%{_fontsdir}/{{100,75}dpi,OTF,Speedo,Type1/{afm,pfm},TTF,cyrillic,local,misc} \
 	$RPM_BUILD_ROOT{%{_idldir},%{_privsepdir}} \
-	$RPM_BUILD_ROOT/boot/efi
+	$RPM_BUILD_ROOT/boot/efi \
+	$RPM_BUILD_ROOT/etc/OpenCL/vendors
 
 > %{name}.lang
 install -d $RPM_BUILD_ROOT/usr/share/help/C
@@ -166,6 +167,8 @@ posix.chown("/var/log/archive", 0, %{gid_logs})
 %dir /boot/efi
 %dir /etc/X11/xinit
 %dir /etc/X11/xinit/xinitrc.d
+%dir /etc/OpenCL
+%dir /etc/OpenCL/vendors
 %attr(751,root,root) %dir /etc/certs
 %dir /etc/default
 %dir /etc/init
