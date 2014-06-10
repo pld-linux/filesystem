@@ -11,7 +11,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	4.0
-Release:	30
+Release:	31
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -44,6 +44,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # we have to use numeric uids/groups. see comment beginning of the spec
 %define		gid_logs	124
+%define		gid_crontab	117
 
 %description
 This package contains common directories for packages that extend some
@@ -61,7 +62,7 @@ rm -rf $RPM_BUILD_ROOT
 
 install -d \
 	$RPM_BUILD_ROOT/{initrd,selinux,run,sys} \
-	$RPM_BUILD_ROOT/etc/{NetworkManager/dispatcher.d,X11/xinit/xinitrc.d,certs,default,init,logrotate.d,modprobe.d,pki/{CA,tls},security,sysconfig,tmpwatch,xdg/{autostart,menus}} \
+	$RPM_BUILD_ROOT/etc/{NetworkManager/dispatcher.d,X11/xinit/xinitrc.d,certs,cron.d,default,init,logrotate.d,modprobe.d,pki/{CA,tls},security,sysconfig,tmpwatch,xdg/{autostart,menus}} \
 	$RPM_BUILD_ROOT/home/{users,services} \
 	$RPM_BUILD_ROOT/lib/{firmware,security,udev/rules.d,systemd/system} \
 	$RPM_BUILD_ROOT/usr/include/{security,X11} \
@@ -161,6 +162,7 @@ end
 
 %post -p <lua>
 posix.chown("/var/log/archive", 0, %{gid_logs})
+posix.chown("/etc/cron.d", 0, %{gid_crontab})
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
@@ -170,6 +172,7 @@ posix.chown("/var/log/archive", 0, %{gid_logs})
 %dir /etc/OpenCL
 %dir /etc/OpenCL/vendors
 %attr(751,root,root) %dir /etc/certs
+%dir /etc/cron.d
 %dir /etc/default
 %dir /etc/init
 %dir /etc/logrotate.d
