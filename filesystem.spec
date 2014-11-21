@@ -11,7 +11,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	4.0
-Release:	32
+Release:	33
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -62,7 +62,7 @@ rm -rf $RPM_BUILD_ROOT
 
 install -d \
 	$RPM_BUILD_ROOT/{initrd,selinux,run,sys} \
-	$RPM_BUILD_ROOT/etc/{NetworkManager/dispatcher.d,X11/xinit/xinitrc.d,certs,cron.d,default,init,logrotate.d,modprobe.d,pki/{CA,tls},security,sysconfig,tmpwatch,xdg/{autostart,menus}} \
+	$RPM_BUILD_ROOT/etc/{NetworkManager/dispatcher.d,X11/xinit/{xinput,xinitrc}.d,certs,cron.d,default,init,logrotate.d,modprobe.d,pki/{CA,tls},security,sysconfig,tmpwatch,xdg/{autostart,menus}} \
 	$RPM_BUILD_ROOT/home/{users,services} \
 	$RPM_BUILD_ROOT/lib/{firmware,security,udev/rules.d,systemd/system} \
 	$RPM_BUILD_ROOT/usr/include/{security,X11} \
@@ -169,6 +169,7 @@ posix.chown("/etc/cron.d", 0, %{gid_crontab})
 %dir /boot/efi
 %dir /etc/X11/xinit
 %dir /etc/X11/xinit/xinitrc.d
+%dir /etc/X11/xinit/xinput.d
 %dir /etc/OpenCL
 %dir /etc/OpenCL/vendors
 %attr(751,root,root) %dir /etc/certs
