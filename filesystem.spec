@@ -37,6 +37,20 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # Adapter: This file does not like to be adapterized!
 
+%if "%{_lib}" == "lib64"
+%define		with_lib64	1
+%else
+%define		with_lib64	0
+%endif
+%if "%{_lib}" == "libx32"
+%define		with_libx32	1
+%else
+%ifarch %{x8664}
+# x32 as additional ABI
+%define		with_libx32	1
+%endif
+%endif
+
 # directory for "privilege separation" chroot
 %define		_privsepdir	/usr/share/empty
 # directory for *.idl files (for CORBA implementations)
@@ -86,25 +100,16 @@ for lang in ar as ast bg bn_IN ca cs da de el en_GB es eu fa fi fr gl gu he hi h
 	echo "%%lang($lang) %dir /usr/share/help/${lang}" >> %{name}.lang
 done
 
-%if "%{_lib}" == "lib64"
+%if %{with lib64}
 install -d \
 	$RPM_BUILD_ROOT/lib64/security \
-	$RPM_BUILD_ROOT/usr/lib64/{browser-plugins,cmake,initrd,mozilla/extensions,pkcs11,pkgconfig}
-install -d \
+	$RPM_BUILD_ROOT/usr/lib64/{browser-plugins,cmake,initrd,mozilla/extensions,pkcs11,pkgconfig} \
 	$RPM_BUILD_ROOT/usr/lib/debug/lib64/security
-%ifarch %{x8664}
+%endif
+%if %{with libx32}
 install -d \
 	$RPM_BUILD_ROOT/libx32/security \
-	$RPM_BUILD_ROOT/usr/libx32/{browser-plugins,cmake,initrd,mozilla/extensions,pkcs11,pkgconfig}
-install -d \
-	$RPM_BUILD_ROOT/usr/lib/debug/libx32/security
-%endif
-%endif
-%if "%{_lib}" == "libx32"
-install -d \
-	$RPM_BUILD_ROOT/libx32/security \
-	$RPM_BUILD_ROOT/usr/libx32/{browser-plugins,cmake,initrd,mozilla/extensions,pkcs11,pkgconfig}
-install -d \
+	$RPM_BUILD_ROOT/usr/libx32/{browser-plugins,cmake,initrd,mozilla/extensions,pkcs11,pkgconfig} \
 	$RPM_BUILD_ROOT/usr/lib/debug/libx32/security
 %endif
 
@@ -143,7 +148,7 @@ check_filesystem_dirs() {
 	TMPFILE=$(mktemp)
 	# note: we must exclude from check all existing dirs belonging to FHS
 	find | sed -e 's|^\.||g' -e 's|^$||g' | LC_ALL=C sort | grep -v $TMPFILE | \
-	grep -E -v '^/(boot|etc|etc/X11|home|lib|lib64|usr|usr/include|usr/lib|usr/lib64|usr/share|usr/share/man|usr/share/man/pl|usr/src|var|var/lib|var/lock|var/log)$' > $TMPFILE
+	grep -E -v '^/(boot|etc|etc/X11|home|lib|lib64|libx32|usr|usr/include|usr/lib|usr/lib64|usr/libx32|usr/share|usr/share/man|usr/share/man/pl|usr/src|var|var/lib|var/lock|var/log)$' > $TMPFILE
 
 	# find finds also '.', so use option -B for diff
 	rpm -qpl $RPMFILE $RPMFILE2 | grep -v '^/$' | LC_ALL=C sort | diff -uB - $TMPFILE || :
@@ -270,7 +275,7 @@ posix.chown("/etc/cron.d", 0, %{gid_crontab})
 %{_fontsdir}
 %dir %{_idldir}
 %dir %{_privsepdir}
-%if "%{_lib}" == "lib64"
+%if %{with lib64}
 %dir /lib64/security
 %dir /usr/lib64/browser-plugins
 %dir /usr/lib64/cmake
@@ -279,18 +284,8 @@ posix.chown("/etc/cron.d", 0, %{gid_crontab})
 %dir /usr/lib64/mozilla/extensions
 %dir /usr/lib64/pkcs11
 %dir /usr/lib64/pkgconfig
-%ifarch %{x8664}
-%dir /libx32/security
-%dir /usr/libx32/browser-plugins
-%dir /usr/libx32/cmake
-%dir /usr/libx32/initrd
-%dir /usr/libx32/mozilla
-%dir /usr/libx32/mozilla/extensions
-%dir /usr/libx32/pkcs11
-%dir /usr/libx32/pkgconfig
 %endif
-%endif
-%if "%{_lib}" == "libx32"
+%if %{with libx32}
 %dir /libx32/security
 %dir /usr/libx32/browser-plugins
 %dir /usr/libx32/cmake
