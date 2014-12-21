@@ -11,7 +11,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	4.0
-Release:	33
+Release:	34
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -90,6 +90,22 @@ done
 install -d \
 	$RPM_BUILD_ROOT/lib64/security \
 	$RPM_BUILD_ROOT/usr/lib64/{browser-plugins,cmake,initrd,mozilla/extensions,pkcs11,pkgconfig}
+install -d \
+	$RPM_BUILD_ROOT/usr/lib/debug/lib64/security
+%ifarch %{x8664}
+install -d \
+	$RPM_BUILD_ROOT/libx32/security \
+	$RPM_BUILD_ROOT/usr/libx32/{browser-plugins,cmake,initrd,mozilla/extensions,pkcs11,pkgconfig}
+install -d \
+	$RPM_BUILD_ROOT/usr/lib/debug/libx32/security
+%endif
+%endif
+%if "%{_lib}" == "libx32"
+install -d \
+	$RPM_BUILD_ROOT/libx32/security \
+	$RPM_BUILD_ROOT/usr/libx32/{browser-plugins,cmake,initrd,mozilla/extensions,pkcs11,pkgconfig}
+install -d \
+	$RPM_BUILD_ROOT/usr/lib/debug/libx32/security
 %endif
 
 %if "%{pld_release}" == "ac"
@@ -112,11 +128,6 @@ install -d \
 	$RPM_BUILD_ROOT/usr/lib/debug/usr/{bin,sbin} \
 	$RPM_BUILD_ROOT/usr/lib/debug/lib/security \
 	$RPM_BUILD_ROOT/usr/src/debug
-
-%if "%{_lib}" == "lib64"
-install -d \
-	$RPM_BUILD_ROOT/usr/lib/debug/lib64/security
-%endif
 
 # create this for %clean
 tar -cf checkfiles.tar -C $RPM_BUILD_ROOT .
@@ -268,6 +279,26 @@ posix.chown("/etc/cron.d", 0, %{gid_crontab})
 %dir /usr/lib64/mozilla/extensions
 %dir /usr/lib64/pkcs11
 %dir /usr/lib64/pkgconfig
+%ifarch %{x8664}
+%dir /libx32/security
+%dir /usr/libx32/browser-plugins
+%dir /usr/libx32/cmake
+%dir /usr/libx32/initrd
+%dir /usr/libx32/mozilla
+%dir /usr/libx32/mozilla/extensions
+%dir /usr/libx32/pkcs11
+%dir /usr/libx32/pkgconfig
+%endif
+%endif
+%if "%{_lib}" == "libx32"
+%dir /libx32/security
+%dir /usr/libx32/browser-plugins
+%dir /usr/libx32/cmake
+%dir /usr/libx32/initrd
+%dir /usr/libx32/mozilla
+%dir /usr/libx32/mozilla/extensions
+%dir /usr/libx32/pkcs11
+%dir /usr/libx32/pkgconfig
 %endif
 
 %if "%{pld_release}" == "ac"
