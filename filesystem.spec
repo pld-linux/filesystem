@@ -11,7 +11,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	4.0
-Release:	34
+Release:	35
 License:	GPL
 Group:		Base
 BuildRequires:	automake
