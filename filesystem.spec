@@ -11,7 +11,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	4.0
-Release:	36
+Release:	37
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -42,6 +42,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %endif
 %if "%{_lib}" == "libx32"
 %define		with_libx32	1
+%define		with_lib64	1
 %else
 %ifarch %{x8664}
 # x32 as additional ABI
