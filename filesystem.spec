@@ -11,7 +11,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	4.0
-Release:	38
+Release:	39
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -80,7 +80,7 @@ install -d \
 	$RPM_BUILD_ROOT/lib/{firmware,security,udev/rules.d,systemd/system} \
 	$RPM_BUILD_ROOT/usr/include/{security,X11} \
 	$RPM_BUILD_ROOT/usr/lib/{ConsoleKit/run-session.d,browser-plugins,cgi-bin,cmake,mozilla/extensions,pkcs11,pkgconfig,initrd,tmpfiles.d} \
-	$RPM_BUILD_ROOT/usr/share/{appdata,augeas/lenses/tests,backgrounds,cmake/Modules,color/icc,fontconfig/conf.avail,gnome/help,mate/help,man/man{n,l},man/pl/mann,ppd,pkgconfig,soundfonts,sounds,themes/Default,thumbnailers,vala/vapi,wallpapers,wayland-sessions,xsessions} \
+	$RPM_BUILD_ROOT/usr/share/{appdata,augeas/lenses/tests,backgrounds,cmake/Modules,color/icc,factory/etc/pam.d,fontconfig/conf.avail,gnome/help,mate/help,man/man{n,l},man/pl/mann,ppd,pkgconfig,soundfonts,sounds,themes/Default,thumbnailers,vala/vapi,wallpapers,wayland-sessions,xsessions} \
 	$RPM_BUILD_ROOT/usr/src/examples \
 	$RPM_BUILD_ROOT/var/lib/color/icc \
 	$RPM_BUILD_ROOT/var/lock/subsys \
@@ -242,6 +242,9 @@ posix.chown("/etc/cron.d", 0, %{gid_crontab})
 %dir /usr/share/cmake/Modules
 %dir /usr/share/color
 %dir /usr/share/color/icc
+%dir /usr/share/factory
+%dir /usr/share/factory/etc
+%dir /usr/share/factory/etc/pam.d
 %dir /usr/share/fontconfig
 %dir /usr/share/fontconfig/conf.avail
 %dir /usr/share/gnome
