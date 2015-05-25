@@ -11,7 +11,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	4.0
-Release:	39
+Release:	40
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -88,13 +88,13 @@ install -d \
 	$RPM_BUILD_ROOT{%{_aclocaldir},%{_desktopdir}/{docklets,screensavers},%{_iconsdir},%{_pixmapsdir}} \
 	$RPM_BUILD_ROOT%{_fontsdir}/{{100,75}dpi,OTF,Speedo,Type1/{afm,pfm},TTF,cyrillic,local,misc} \
 	$RPM_BUILD_ROOT{%{_idldir},%{_privsepdir}} \
-	$RPM_BUILD_ROOT/boot/efi \
+	$RPM_BUILD_ROOT/boot/efi/EFI \
 	$RPM_BUILD_ROOT/etc/OpenCL/vendors
 
 > %{name}.lang
 install -d $RPM_BUILD_ROOT/usr/share/help/C
 
-for lang in ar as ast bg bn_IN ca cs da de el en_GB es eu fa fi fr gl gu he hi hr hu id it ja ko kn lt lv mk ml mr nb nds nl oc pa pl ps pt pt_BR ro ru sl sr sr@latin sv ta te th tr uk vi zh_CN zh_HK zh_TW; do
+for lang in ar as ast bg bn_IN ca cs da de el en_GB es eu fa fi fr gl gu he hi hr hu id it ja ko kn lt lv mk ml mr nb nds nl oc pa pl ps pt pt_BR ro ru sk sl sr sr@latin sv ta te th tr uk vi zh_CN zh_HK zh_TW; do
 	install -d $RPM_BUILD_ROOT/usr/share/help/${lang}
 	echo "%%lang($lang) %dir /usr/share/help/${lang}" >> %{name}.lang
 done
@@ -182,6 +182,7 @@ posix.chown("/etc/cron.d", 0, %{gid_crontab})
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %dir /boot/efi
+%dir /boot/efi/EFI
 %dir /etc/X11/xinit
 %dir /etc/X11/xinit/xinitrc.d
 %dir /etc/X11/xinit/xinput.d
