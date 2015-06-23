@@ -1,6 +1,7 @@
 # NOTE
 # - do not use any other user/group than "root", as then we have to depend on "setup" package.
 #   see the gid_xxx macros and post scriptlet
+# FIXME: verify shows changed groups of dirs changed this way
 
 # disable rpm generated debug package, we handle it differently here
 %define		_enable_debug_packages	0
@@ -11,7 +12,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	4.0
-Release:	41
+Release:	42
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -77,7 +78,7 @@ install -d \
 	$RPM_BUILD_ROOT/{initrd,selinux,run,sys} \
 	$RPM_BUILD_ROOT/etc/{NetworkManager/dispatcher.d,X11/xinit/{xinput,xinitrc}.d,certs,cron.d,default,init,logrotate.d,fonts/conf.d,modprobe.d,pki/{CA,tls},security,skel,sysconfig,tmpwatch,xdg/{autostart,menus}} \
 	$RPM_BUILD_ROOT/home/{users,services} \
-	$RPM_BUILD_ROOT/lib/{firmware,security,udev/rules.d,systemd/system} \
+	$RPM_BUILD_ROOT/lib/{firmware,security,udev/{hwdb.d,rules.d},systemd/system} \
 	$RPM_BUILD_ROOT/usr/include/{security,X11} \
 	$RPM_BUILD_ROOT/usr/lib/{ConsoleKit/run-session.d,browser-plugins,cgi-bin,cmake,mozilla/extensions,pkcs11,pkgconfig,initrd,tmpfiles.d} \
 	$RPM_BUILD_ROOT/usr/share/{appdata,augeas/lenses/tests,backgrounds,cmake/Modules,color/icc,factory/etc/pam.d,fontconfig/conf.avail,gnome/help,mate/help,man/man{n,l},man/pl/mann,ppd,pkgconfig,soundfonts,sounds,themes/Default,thumbnailers,vala/vapi,wallpapers,wayland-sessions,xsessions} \
@@ -215,9 +216,12 @@ posix.chown("/etc/cron.d", 0, %{gid_crontab})
 %dir /lib/security
 %dir /lib/systemd
 %dir /lib/systemd/system
+# for library packages or other software with optional udev support not to pull udev
 %dir /lib/udev
+%dir /lib/udev/hwdb.d
 %dir /lib/udev/rules.d
-%dir /run
+# tmpfs mounted by rc-scripts
+%attr(1777,root,root) %dir /run
 %dir /selinux
 %dir /sys
 %if "%{pld_release}" != "ac"
