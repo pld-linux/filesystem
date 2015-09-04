@@ -12,7 +12,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	4.0
-Release:	43
+Release:	44
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -76,7 +76,7 @@ rm -rf $RPM_BUILD_ROOT
 
 install -d \
 	$RPM_BUILD_ROOT/{initrd,selinux,run,sys} \
-	$RPM_BUILD_ROOT/etc/{NetworkManager/dispatcher.d,X11/xinit/{xinput,xinitrc}.d,certs,cron.d,default,logrotate.d,fonts/conf.d,modprobe.d,pki/{CA,tls},security,skel,sysconfig,tmpwatch,xdg/{autostart,menus}} \
+	$RPM_BUILD_ROOT/etc/{NetworkManager/dispatcher.d,X11/xinit/{xinput,xinitrc}.d,certs,cron.d,default,logrotate.d,fonts/conf.d,modprobe.d,pki/{CA,tls},security,skel,sysconfig,tmpwatch,xdg/{autostart,colors,menus}} \
 	$RPM_BUILD_ROOT/home/{users,services} \
 	$RPM_BUILD_ROOT/lib/{firmware,security,udev/{hwdb.d,rules.d},systemd/system} \
 	$RPM_BUILD_ROOT/usr/include/{security,X11} \
@@ -205,6 +205,7 @@ posix.chown("/etc/cron.d", 0, %{gid_crontab})
 %dir /etc/tmpwatch
 %dir /etc/xdg
 %dir /etc/xdg/autostart
+%dir /etc/xdg/colors
 %dir /etc/xdg/menus
 %dir /etc/NetworkManager
 %dir /etc/NetworkManager/dispatcher.d
