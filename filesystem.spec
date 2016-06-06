@@ -11,14 +11,14 @@
 Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
-Version:	4.0
-Release:	46
+Version:	4.1
+Release:	1
 License:	GPL
 Group:		Base
 BuildRequires:	automake
 BuildRequires:	mktemp
 BuildRequires:	rpm >= 4.4.9-56
-Requires:	FHS >= 2.3-15
+Requires:	FHS >= 3.0
 Provides:	browser-plugins(%{_target_base_arch})
 %ifarch %{x8664}
 Provides:	browser-plugins(i386)
@@ -78,15 +78,14 @@ funkcjonalność programów, ale nie wymagających ich.
 rm -rf $RPM_BUILD_ROOT
 
 install -d \
-	$RPM_BUILD_ROOT/{initrd,selinux,run,sys} \
+	$RPM_BUILD_ROOT/{initrd,selinux} \
 	$RPM_BUILD_ROOT/etc/{NetworkManager/dispatcher.d,X11/xinit/{xinput,xinitrc}.d,certs,cron.d,default,logrotate.d,fonts/conf.d,modprobe.d,pki/{CA,tls},security,skel,sysconfig,tmpwatch,xdg/{autostart,colors,menus}} \
 	$RPM_BUILD_ROOT/home/{users,services} \
 	$RPM_BUILD_ROOT/lib/{firmware,security,udev/{hwdb.d,rules.d},systemd/system} \
 	$RPM_BUILD_ROOT/usr/include/{security,X11} \
 	$RPM_BUILD_ROOT/usr/lib/{ConsoleKit/run-session.d,browser-plugins,cgi-bin,cmake,mozilla/extensions,pkcs11,pkgconfig,initrd,tmpfiles.d} \
-	$RPM_BUILD_ROOT/usr/share/{appdata,augeas/lenses/tests,backgrounds,cmake/Modules,color/icc,defaults,factory/etc/pam.d,fontconfig/conf.avail,gnome/help,mate/help,man/man{n,l},man/pl/mann,ppd,pkgconfig,soundfonts,sounds,themes/Default,thumbnailers,vala/vapi,wallpapers,wayland-sessions,xsessions} \
+	$RPM_BUILD_ROOT/usr/share/{appdata,augeas/lenses/tests,backgrounds,cmake/Modules,defaults,factory/etc/pam.d,fontconfig/conf.avail,gnome/help,mate/help,man/man{n,l},man/pl/mann,pkgconfig,soundfonts,sounds,themes/Default,thumbnailers,vala/vapi,wallpapers,wayland-sessions,xsessions} \
 	$RPM_BUILD_ROOT/usr/src/examples \
-	$RPM_BUILD_ROOT/var/lib/color/icc \
 	$RPM_BUILD_ROOT/var/lock/subsys \
 	$RPM_BUILD_ROOT/var/log/archive \
 	$RPM_BUILD_ROOT{%{_aclocaldir},%{_desktopdir}/{docklets,screensavers},%{_iconsdir},%{_pixmapsdir}} \
@@ -223,10 +222,7 @@ posix.chown("/etc/cron.d", 0, %{gid_crontab})
 %dir /lib/udev
 %dir /lib/udev/hwdb.d
 %dir /lib/udev/rules.d
-# tmpfs mounted by rc-scripts
-%attr(1777,root,root) %dir /run
 %dir /selinux
-%dir /sys
 %if "%{pld_release}" != "ac"
 %dir /usr/include/X11
 %endif
@@ -249,8 +245,6 @@ posix.chown("/etc/cron.d", 0, %{gid_crontab})
 %dir /usr/share/backgrounds
 %dir /usr/share/cmake
 %dir /usr/share/cmake/Modules
-%dir /usr/share/color
-%dir /usr/share/color/icc
 %dir /usr/share/defaults
 %dir /usr/share/factory
 %dir /usr/share/factory/etc
@@ -266,7 +260,6 @@ posix.chown("/etc/cron.d", 0, %{gid_crontab})
 %dir /usr/share/man/man[nl]
 %lang(pl) %dir /usr/share/man/pl/mann
 %dir /usr/share/pkgconfig
-%dir /usr/share/ppd
 %dir /usr/share/soundfonts
 %dir /usr/share/sounds
 %dir /usr/share/themes
@@ -278,8 +271,6 @@ posix.chown("/etc/cron.d", 0, %{gid_crontab})
 %dir /usr/share/wayland-sessions
 %dir /usr/share/xsessions
 %dir /usr/src/examples
-%dir /var/lib/color
-%dir /var/lib/color/icc
 %attr(700,root,root) %dir /var/lock/subsys
 %attr(751,root,root) %dir /var/log/archive
 %dir %{_aclocaldir}
