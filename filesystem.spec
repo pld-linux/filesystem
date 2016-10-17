@@ -6,7 +6,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	4.1
-Release:	2
+Release:	3
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -83,7 +83,7 @@ install -d \
 	$RPM_BUILD_ROOT/home/{users,services} \
 	$RPM_BUILD_ROOT/lib/{firmware,security,udev/{hwdb.d,rules.d},systemd/system} \
 	$RPM_BUILD_ROOT/usr/include/{security,X11} \
-	$RPM_BUILD_ROOT/usr/lib/{ConsoleKit/run-session.d,browser-plugins,cgi-bin,cmake,mozilla/extensions,pkcs11,pkgconfig,initrd,tmpfiles.d} \
+	$RPM_BUILD_ROOT/usr/lib/{ConsoleKit/run-session.d,browser-plugins,cgi-bin,cmake,mozilla/extensions,pkcs11,pkgconfig,initrd,tmpfiles.d,binfmt.d} \
 	$RPM_BUILD_ROOT/usr/share/{appdata,augeas/lenses/tests,backgrounds,cmake/Modules,defaults,factory/etc/pam.d,fontconfig/conf.avail,gnome/help,mate/help,man/man{n,l},man/pl/mann,pkgconfig,soundfonts,sounds,themes/Default,thumbnailers,vala/vapi,wallpapers,wayland-sessions,xdg-desktop-portal/portals,xsessions} \
 	$RPM_BUILD_ROOT/usr/src/examples \
 	$RPM_BUILD_ROOT/var/lock/subsys \
@@ -226,6 +226,7 @@ posix.chown("/etc/cron.d", 0, %{gid_crontab})
 %dir /usr/include/security
 %dir /usr/lib/ConsoleKit
 %dir /usr/lib/ConsoleKit/run-session.d
+%dir /usr/lib/binfmt.d
 %dir /usr/lib/browser-plugins
 %dir /usr/lib/cgi-bin
 %dir /usr/lib/cmake
