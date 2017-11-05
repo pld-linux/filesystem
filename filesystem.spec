@@ -6,7 +6,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	4.1
-Release:	4
+Release:	5
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -84,7 +84,7 @@ install -d \
 	$RPM_BUILD_ROOT/lib/{firmware,security,udev/{hwdb.d,rules.d},systemd/system} \
 	$RPM_BUILD_ROOT/usr/include/{security,X11} \
 	$RPM_BUILD_ROOT/usr/lib/{ConsoleKit/run-session.d,browser-plugins,cgi-bin,cmake,mozilla/extensions,pkcs11,pkgconfig,initrd,tmpfiles.d,binfmt.d} \
-	$RPM_BUILD_ROOT/usr/share/{appdata,augeas/lenses/tests,backgrounds,cmake/Modules,defaults,factory/etc/pam.d,fontconfig/conf.avail,gnome/help,mate/help,man/man{n,l},man/pl/mann,metainfo,pkgconfig,soundfonts,sounds,themes/Default,thumbnailers,vala/vapi,wallpapers,wayland-sessions,xdg-desktop-portal/portals,xsessions} \
+	$RPM_BUILD_ROOT/usr/share/{appdata,augeas/lenses/tests,backgrounds,cmake/Modules,defaults,factory/etc/pam.d,fontconfig/conf.avail,gnome/help,mate/help,man/man{n,l},man/pl/mann,metainfo,pkgconfig,soundfonts,sounds,themes/Default,thumbnailers,vala/vapi,wallpapers,wayland-sessions,xdg-desktop-portal/portals,xsessions,zsh/site-functions} \
 	$RPM_BUILD_ROOT/usr/src/examples \
 	$RPM_BUILD_ROOT/var/lock/subsys \
 	$RPM_BUILD_ROOT/var/log/archive \
@@ -271,6 +271,7 @@ posix.chown("/etc/cron.d", 0, %{gid_crontab})
 %dir /usr/share/xdg-desktop-portal
 %dir /usr/share/xdg-desktop-portal/portals
 %dir /usr/share/xsessions
+%dir /usr/share/zsh/site-functions
 %dir /usr/src/examples
 %attr(700,root,root) %dir /var/lock/subsys
 %attr(751,root,root) %dir /var/log/archive
