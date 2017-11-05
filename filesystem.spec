@@ -6,7 +6,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	4.1
-Release:	5
+Release:	6
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -271,6 +271,7 @@ posix.chown("/etc/cron.d", 0, %{gid_crontab})
 %dir /usr/share/xdg-desktop-portal
 %dir /usr/share/xdg-desktop-portal/portals
 %dir /usr/share/xsessions
+%dir /usr/share/zsh
 %dir /usr/share/zsh/site-functions
 %dir /usr/src/examples
 %attr(700,root,root) %dir /var/lock/subsys
