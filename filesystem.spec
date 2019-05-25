@@ -6,7 +6,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	4.1
-Release:	13
+Release:	14
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -97,7 +97,21 @@ install -d \
 > %{name}.lang
 install -d $RPM_BUILD_ROOT/usr/share/help/C
 
-for lang in aa aa@saaho af ak am an ang anp ar ar_TN as ast az az_IR be be@latin bem be@tarask bg bho bn bn_IN bo br brx bs byn ca ca@valencia ce chr ckb cmn crh cs csb cv cy da de de_AT de_CH doi dv dz el en en_AU en@boldquot en_CA en_GB en_NZ en@quot en@shaw en_US eo es es_AR es_CL es_CO es_CR es_DO es_EC es_GT es_HN es_MX es_NI es_PA es_PE es_PR es_SV es_UY es_VE et eu fa ff fi fil fo fr fr_BE fr_CA fr_CH fur fy ga gd gez gl gu gv ha he hi hne hr hsb ht hu hy ia id ig ik is it it_CH iu ja ka kg kk kl km kn ko kok ks ks@devanagari ku kw ky la lb lg li ln lo locale.alias lt lv mai mg mhr mi mk ml mn mni mr ms mt my nb nds ne nl nl_BE nn nr nso oc om or pa pap pl ps pt pt_BR quz rm ro ru rw sa sat sc sd sd@devanagari se shn si sid sk sl so sq sr sr@ije sr@ijekavian sr@ijekavianlatin sr@latin sr@Latn ss st sv sw szl ta te tg th ti tig tk tl tlh tn tr ts tt tt@iqtelif ug uk ur uz uz@cyrillic ve vi wa wal wo xh yi yo zh_CN zh_HK zh_TW zu; do
+for lang in aa aa@saaho af ak am an ang anp ar ar_TN as ast az az_IR \
+	be be@latin be@tarask bem bg bho bn bn_IN bo br brx bs byn \
+	ca ca@valencia ce chr ckb cmn crh cs csb cv cy \
+	da de de_AT de_CH doi dv dz \
+	el en en_AU en_CA en_GB en_NZ en@shaw en_US eo es \
+	es_AR es_CL es_CO es_CR es_DO es_EC es_GT es_HN es_MX es_NI es_PA es_PE es_PR es_SV es_UY es_VE \
+	et eu fa ff fi fil fo fr fr_BE fr_CA fr_CH fur fy ga gd gez gl gu gv \
+	ha he hi hne hr hsb ht hu hy ia id ig ik is it it_CH iu ja \
+	ka kab kg kk kl km kn ko kok ks ks@devanagari ku kw ky la lb lg li ln lo lt lv \
+	mai mg mhr mi mk ml mn mni mr ms mt my nb nds ne nl nl_BE nn nr nso oc om or \
+	pa pap pl ps pt pt_BR quz rm ro ru rw \
+	sa sat sc sd sd@devanagari se shn si sid sk sl so sq \
+	sr sr@ijekavian sr@ijekavianlatin sr@latin ss st sv sw szl \
+	ta te tg th ti tig tk tl tlh tn tpi tr ts tt tt@iqtelif \
+	ug uk ur uz uz@cyrillic ve vi wa wal wo xh yi yo zh_CN zh_HK zh_TW zu; do
 	install -d $RPM_BUILD_ROOT/usr/share/help/${lang}
 	echo "%%lang($lang) %dir /usr/share/help/${lang}" >> %{name}.lang
 done
