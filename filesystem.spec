@@ -6,7 +6,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	4.1
-Release:	14
+Release:	15
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -79,7 +79,7 @@ rm -rf $RPM_BUILD_ROOT
 
 install -d \
 	$RPM_BUILD_ROOT/{initrd,selinux} \
-	$RPM_BUILD_ROOT/etc/{NetworkManager/dispatcher.d,X11/xinit/{xinput,xinitrc}.d,certs,cron.d,default,logrotate.d,fonts/conf.d,modprobe.d,pki/{CA,tls},security,skel,sysconfig,tmpwatch,xdg/{autostart,colors,menus}} \
+	$RPM_BUILD_ROOT/etc/{NetworkManager/dispatcher.d,X11/xinit/{xinput,xinitrc}.d,certs,cron.d,default,logrotate.d,fonts/conf.d,modprobe.d,pki/{CA,tls},security,skel,sysconfig,tmpwatch,xdg/colors} \
 	$RPM_BUILD_ROOT/home/{users,services} \
 	$RPM_BUILD_ROOT/lib/{firmware,security,udev/{hwdb.d,rules.d},systemd/system} \
 	$RPM_BUILD_ROOT/usr/include/{security,X11} \
@@ -88,11 +88,26 @@ install -d \
 	$RPM_BUILD_ROOT/usr/src/examples \
 	$RPM_BUILD_ROOT/var/lock/subsys \
 	$RPM_BUILD_ROOT/var/log/archive \
-	$RPM_BUILD_ROOT{%{_aclocaldir},%{_desktopdir}/{docklets,screensavers},%{_iconsdir},%{_pixmapsdir}} \
+	$RPM_BUILD_ROOT%{_aclocaldir} \
 	$RPM_BUILD_ROOT%{_fontsdir}/{{100,75}dpi,OTF,Speedo,Type1/{afm,pfm},TTF,cyrillic,local,misc} \
 	$RPM_BUILD_ROOT{%{_idldir},%{_privsepdir}} \
 	$RPM_BUILD_ROOT/boot/efi/EFI \
 	$RPM_BUILD_ROOT/etc/OpenCL/vendors
+
+# XDG Autostart specs: https://specifications.freedesktop.org/autostart-spec/autostart-spec-latest.html
+install -d $RPM_BUILD_ROOT/etc/xdg/autostart
+
+# XDG Desktop Menus specs: https://specifications.freedesktop.org/menu-spec/menu-spec-latest.html
+# (+custom AppDir hierarchy)
+install -d $RPM_BUILD_ROOT{/etc/xdg/menus/applications-merged,/usr/share/desktop-directories,%{_desktopdir}/{docklets,screensavers}}
+
+# XDG Icon Theme specs: https://specifications.freedesktop.org/icon-theme-spec/icon-theme-spec-latest.html
+# (top level only)
+install -d $RPM_BUILD_ROOT{%{_iconsdir},%{_pixmapsdir}}
+
+# XDG Sound Theme specs: https://specifications.freedesktop.org/sound-theme-spec/sound-theme-spec-latest.html
+# (top level only)
+install -d $RPM_BUILD_ROOT/usr/share/sounds
 
 > %{name}.lang
 install -d $RPM_BUILD_ROOT/usr/share/help/C
@@ -220,6 +235,7 @@ posix.chown("/etc/cron.d", 0, %{gid_crontab})
 %dir /etc/xdg/autostart
 %dir /etc/xdg/colors
 %dir /etc/xdg/menus
+%dir /etc/xdg/menus/applications-merged
 %dir /etc/NetworkManager
 %dir /etc/NetworkManager/dispatcher.d
 %dir /home/users
@@ -258,6 +274,7 @@ posix.chown("/etc/cron.d", 0, %{gid_crontab})
 %dir /usr/share/cmake
 %dir /usr/share/cmake/Modules
 %dir /usr/share/defaults
+%dir /usr/share/desktop-directories
 %dir /usr/share/factory
 %dir /usr/share/factory/etc
 %dir /usr/share/factory/etc/pam.d
