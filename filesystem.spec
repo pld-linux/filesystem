@@ -6,7 +6,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	4.1
-Release:	15
+Release:	16
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -218,7 +218,8 @@ posix.chown("/etc/cron.d", 0, %{gid_crontab})
 %dir /etc/OpenCL
 %dir /etc/OpenCL/vendors
 %attr(751,root,root) %dir /etc/certs
-%dir /etc/cron.d
+# root:crontab
+%attr(750,root,root) %dir /etc/cron.d
 %dir /etc/default
 %dir /etc/fonts
 %dir /etc/fonts/conf.d
