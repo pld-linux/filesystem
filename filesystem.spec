@@ -6,7 +6,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	4.1
-Release:	17
+Release:	18
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -84,7 +84,7 @@ install -d \
 	$RPM_BUILD_ROOT/lib/{firmware,security,udev/{hwdb.d,rules.d},systemd/system} \
 	$RPM_BUILD_ROOT/usr/include/{security,X11} \
 	$RPM_BUILD_ROOT/usr/lib/{ConsoleKit/run-session.d,browser-plugins,cgi-bin,cmake,mozilla/extensions,pkcs11,pkgconfig,initrd,tmpfiles.d,binfmt.d} \
-	$RPM_BUILD_ROOT/usr/share/{appdata,augeas/lenses/tests,backgrounds,cmake/Modules,defaults,doc/gi-doc,factory/etc/pam.d,fontconfig/conf.avail,gnome/help,mate/help,man/man{n,l},man/pl/mann,metainfo,pkgconfig,soundfonts,sounds,themes/Default,thumbnailers,vala/vapi,wallpapers,wayland-sessions,xdg-desktop-portal/portals,xsessions,zsh/site-functions} \
+	$RPM_BUILD_ROOT/usr/share/{appdata,augeas/lenses/tests,backgrounds,bash-completion/completions,cmake/Modules,defaults,doc/gi-doc,factory/etc/pam.d,fish/vendor_completions.d,fontconfig/conf.avail,gnome/help,mate/help,man/man{n,l},man/pl/mann,metainfo,pkgconfig,soundfonts,sounds,themes/Default,thumbnailers,vala/vapi,wallpapers,wayland-sessions,xdg-desktop-portal/portals,xsessions,zsh/site-functions} \
 	$RPM_BUILD_ROOT/usr/src/examples \
 	$RPM_BUILD_ROOT/var/lock/subsys \
 	$RPM_BUILD_ROOT/var/log/archive \
@@ -272,6 +272,8 @@ posix.chown("/etc/cron.d", 0, %{gid_crontab})
 %dir /usr/share/augeas/lenses
 %dir /usr/share/augeas/lenses/tests
 %dir /usr/share/backgrounds
+%dir /usr/share/bash-completion
+%dir /usr/share/bash-completion/completions
 %dir /usr/share/cmake
 %dir /usr/share/cmake/Modules
 %dir /usr/share/defaults
@@ -280,6 +282,8 @@ posix.chown("/etc/cron.d", 0, %{gid_crontab})
 %dir /usr/share/factory
 %dir /usr/share/factory/etc
 %dir /usr/share/factory/etc/pam.d
+%dir /usr/share/fish
+%dir /usr/share/fish/vendor_completions.d
 %dir /usr/share/fontconfig
 %dir /usr/share/fontconfig/conf.avail
 %dir /usr/share/gnome
