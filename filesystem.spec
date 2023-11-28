@@ -6,7 +6,7 @@ Summary:	Common directories
 Summary(pl.UTF-8):	Wspólne katalogi
 Name:		filesystem
 Version:	4.1
-Release:	18
+Release:	19
 License:	GPL
 Group:		Base
 BuildRequires:	automake
@@ -121,7 +121,7 @@ for lang in aa aa@saaho af ak am an ang anp ar ar_TN as ast az az_IR \
 	et eu fa ff fi fil fo fr fr_BE fr_CA fr_CH fur fy ga gd gez gl gu gv \
 	ha he hi hne hr hsb ht hu hy ia id ig ik is it it_CH iu ja \
 	ka kab kg kk kl km kn ko kok ks ks@devanagari ku kw ky la lb lg li ln lo lt lv \
-	mai mg mhr mi mk ml mn mni mr ms mt my nb nds ne nl nl_BE nn nr nso oc om or \
+	mai mg mhr mi mk ml mn mni mr ms mt my nan nb nds ne nl nl_BE nn nr nso oc om or \
 	pa pap pl ps pt pt_BR quz rm ro ru rw \
 	sa sat sc sd sd@devanagari se shn si sid sk sl so sq \
 	sr sr@ijekavian sr@ijekavianlatin sr@latin ss st sv sw szl \
